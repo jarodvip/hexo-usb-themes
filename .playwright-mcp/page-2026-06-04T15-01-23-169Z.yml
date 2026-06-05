@@ -1,0 +1,567 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "烧饼博客" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e5]:
+        - navigation [ref=e6]:
+          - link "首页" [ref=e7] [cursor=pointer]:
+            - /url: /
+          - link "标签" [ref=e8] [cursor=pointer]:
+            - /url: /tags/
+          - link "归档" [ref=e9] [cursor=pointer]:
+            - /url: /archives/
+          - link "友链" [ref=e10] [cursor=pointer]:
+            - /url: /links/
+          - link "关于" [ref=e11] [cursor=pointer]:
+            - /url: /about/
+          - link "联系" [ref=e12] [cursor=pointer]:
+            - /url: /contact/
+          - link "捐赠" [ref=e13] [cursor=pointer]:
+            - /url: https://nm.sl/
+          - link "免责声明" [ref=e14] [cursor=pointer]:
+            - /url: /disclaimer/
+        - link "RSS Feed" [ref=e15] [cursor=pointer]:
+          - /url: /atom.xml
+          - img [ref=e16]
+        - button "Search" [ref=e18] [cursor=pointer]:
+          - img [ref=e19]
+  - main [ref=e22]:
+    - generic [ref=e23]:
+      - article [ref=e25]:
+        - heading "Debian / Ubuntu 使用源安装 LAMP 教程" [level=1] [ref=e27]
+        - generic [ref=e28]:
+          - figure [ref=e29]:
+            - img "Debian / Ubuntu 使用源安装 LAMP 教程" [ref=e30]
+          - generic [ref=e31]:
+            - paragraph [ref=e32]: 本文将介绍使用官方源和第三方源在 Debian 和 Ubuntu 安装最新版 Apache 2 + PHP + MySQL 的教程，并且可以自行选择 PHP 版本。
+            - paragraph [ref=e33]:
+              - strong [ref=e34]: PS：本文适用于 Debian Stable 以及 Ubuntu LTS
+            - paragraph [ref=e35]:
+              - text: 以下操作需要在 root 用户下完成，请使用
+              - code [ref=e36]: sudo -i
+              - text: 或
+              - code [ref=e37]: su root
+              - text: 切换到 root 用户进行操作。
+            - heading "Permalink1、更新系统并安装部分必要软件" [level=2] [ref=e38]:
+              - link "Permalink" [ref=e39] [cursor=pointer]:
+                - /url: "#1-geng-xin-xi-tong-bing-an-zhuang-bu-fen-bi-yao-ruan-jian"
+                - text: "#"
+              - text: 1、更新系统并安装部分必要软件
+            - generic [ref=e40]:
+              - code [ref=e42]: apt update apt upgrade -y apt dist-upgrade -y apt install curl vim wget gnupg dpkg apt-transport-https lsb-release ca-certificates
+              - button "Copy" [ref=e44] [cursor=pointer]
+            - paragraph [ref=e45]:
+              - strong [ref=e46]:
+                - text: 如果您通过 iso 方式安装 Debian 并且设置了 root 密码，则默认不带
+                - code [ref=e47]: sudo
+                - text: 包，使用
+                - code [ref=e48]: apt install sudo
+                - text: 安装即可
+            - heading "Permalink2、增加 Ondřej Surý 大神打包的 PHP 源并安装 PHP 8.x" [level=2] [ref=e49]:
+              - link "Permalink" [ref=e50] [cursor=pointer]:
+                - /url: "#2-zeng-jia-ondrej-sury-da-shen-da-bao-de-php-yuan-bing-an-zhuang-php-8-x"
+                - text: "#"
+              - text: 2、增加 Ondřej Surý 大神打包的 PHP 源并安装 PHP 8.x
+            - paragraph [ref=e51]:
+              - text: 和
+              - link "LEMP" [ref=e52] [cursor=pointer]:
+                - /url: /debian-install-nginx-php-mysql/
+              - text: 安装方法一样，我们还是使用
+              - link "Ondřej Surý" [ref=e53] [cursor=pointer]:
+                - /url: https://deb.sury.org/
+              - text: 大佬打包的 PHP 源。
+            - paragraph [ref=e54]: 至于为啥先装 PHP 再装 Apache 2，因为装了 PHP 以后 Apache 2 会识别你 PHP 版本然后生成对应的配置文件，所以顺序不要搞反。
+            - heading "Permalink2.1 Debian 和 Ubuntu 安装 LAMP 区别" [level=3] [ref=e55]:
+              - link "Permalink" [ref=e56] [cursor=pointer]:
+                - /url: "#2-1-debian-he-ubuntu-an-zhuang-lamp-qu-bie"
+                - text: "#"
+              - text: 2.1 Debian 和 Ubuntu 安装 LAMP 区别
+            - paragraph [ref=e57]: 唯一区别就是 PHP 和 Apache 2 的安装添加源方法不一样，其他的步骤都一毛一样。
+            - heading "Permalink2.2 加入大神做好的源" [level=3] [ref=e58]:
+              - link "Permalink" [ref=e59] [cursor=pointer]:
+                - /url: "#2-2-jia-ru-da-shen-zuo-hao-de-yuan"
+                - text: "#"
+              - text: 2.2 加入大神做好的源
+            - generic [ref=e60]:
+              - generic [ref=e61]:
+                - button "Debian" [ref=e62] [cursor=pointer]
+                - button "Ubuntu" [ref=e63] [cursor=pointer]
+              - generic [ref=e66]:
+                - code [ref=e68]:
+                  - text: wget -O /usr/share/keyrings/php.gpg https://packages.sury.org/php/apt.gpg echo
+                  - generic [ref=e69]: "\"deb [signed-by=/usr/share/keyrings/php.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main\""
+                  - text: "> /etc/apt/sources.list.d/php.list"
+                - button "Copy" [ref=e71] [cursor=pointer]
+            - paragraph [ref=e72]:
+              - text: Debian 下也可以直接使用
+              - link "extrepo" [ref=e73] [cursor=pointer]:
+                - /url: /debian-extrepo/
+              - text: ":"
+            - generic [ref=e74]:
+              - code [ref=e76]: sudo apt update sudo apt install extrepo -y sudo extrepo enable sury
+              - button "Copy" [ref=e78] [cursor=pointer]
+            - heading "Permalink2.3 更新系统源" [level=3] [ref=e79]:
+              - link "Permalink" [ref=e80] [cursor=pointer]:
+                - /url: "#2-3-geng-xin-xi-tong-yuan"
+                - text: "#"
+              - text: 2.3 更新系统源
+            - generic [ref=e81]:
+              - code [ref=e83]: apt update apt upgrade -y
+              - button "Copy" [ref=e85] [cursor=pointer]
+            - heading "Permalink2.4 安装自己需要的 PHP 版本" [level=3] [ref=e86]:
+              - link "Permalink" [ref=e87] [cursor=pointer]:
+                - /url: "#2-4-an-zhuang-zi-ji-xu-yao-de-php-ban-ben"
+                - text: "#"
+              - text: 2.4 安装自己需要的 PHP 版本
+            - paragraph [ref=e88]: 这个源目前默认的 PHP 是 8.5.x，如果您需要其他版本，那么请修改对应的 PHP 版本号 (注意配置文件哦)。
+            - paragraph [ref=e89]: 这里举例 WordPress 需要的部分 PHP 包
+            - paragraph [ref=e90]: "安装 PHP 8.5.x (从 PHP 8.5 开始 OPcache 已经强制集成，不需要单独安装):"
+            - generic [ref=e91]:
+              - code [ref=e93]: "apt install php8.5-{fpm,cli,mysql,curl,gd,mbstring,xml,zip,imap,soap,gmp,bcmath} -y"
+              - button "Copy" [ref=e95] [cursor=pointer]
+            - paragraph [ref=e96]: 安装 PHP 8.4.x：
+            - generic [ref=e97]:
+              - code [ref=e99]: "apt install php8.4-{fpm,cli,mysql,curl,gd,mbstring,xml,zip,imap,opcache,soap,gmp,bcmath} -y"
+              - button "Copy" [ref=e101] [cursor=pointer]
+            - paragraph [ref=e102]: 安装 PHP 8.3.x：
+            - generic [ref=e103]:
+              - code [ref=e105]: "apt install php8.3-{fpm,cli,mysql,curl,gd,mbstring,xml,zip,imap,opcache,soap,gmp,bcmath} -y"
+              - button "Copy" [ref=e107] [cursor=pointer]
+            - paragraph [ref=e108]: 安装 PHP 8.2.x：
+            - generic [ref=e109]:
+              - code [ref=e111]: apt install php8.2-fpm php8.2-cli php8.2-mysql php8.2-curl php8.2-gd php8.2-mbstring php8.2-xml php8.2-zip php8.2-imap php8.2-opcache php8.2-soap php8.2-gmp php8.2-bcmath -y
+              - button "Copy" [ref=e113] [cursor=pointer]
+            - paragraph [ref=e114]:
+              - strong [ref=e115]: 以下版本 PHP 已经 EOL，PHP 官方不再提供支持，请尽快更新您的程序兼容最新的 PHP，如果您的程序还未兼容，建议鞭策开发者
+            - paragraph [ref=e116]: 安装 PHP 8.1.x
+            - generic [ref=e117]:
+              - code [ref=e119]: apt install php8.1-fpm php8.1-cli php8.1-mysql php8.1-curl php8.1-gd php8.1-mbstring php8.1-xml php8.1-zip php8.1-imap php8.1-opcache php8.1-soap php8.1-gmp php8.1-bcmath -y
+              - button "Copy" [ref=e121] [cursor=pointer]
+            - paragraph [ref=e122]: 安装 PHP 8.0.x
+            - generic [ref=e123]:
+              - code [ref=e125]: apt install php8.0-fpm php8.0-cli php8.0-mysql php8.0-curl php8.0-gd php8.0-mbstring php8.0-xml php8.0-zip php8.0-imap php8.0-opcache php8.0-soap php8.0-gmp php8.0-bcmath -y
+              - button "Copy" [ref=e127] [cursor=pointer]
+            - paragraph [ref=e128]: 安装 PHP 7.4.x
+            - generic [ref=e129]:
+              - code [ref=e131]: apt install php7.4-fpm php7.4-cli php7.4-mysql php7.4-curl php7.4-gd php7.4-mbstring php7.4-xml php7.4-xmlrpc php7.4-zip php7.4-json php7.4-imap php7.4-opcache php7.4-soap php7.4-gmp php7.4-bcmath -y
+              - button "Copy" [ref=e133] [cursor=pointer]
+            - paragraph [ref=e134]: 安装 PHP 7.3.x
+            - generic [ref=e135]:
+              - code [ref=e137]: apt install php7.3-fpm php7.3-mysql php7.3-curl php7.3-gd php7.3-mbstring php7.3-xml php7.3-xmlrpc php7.3-zip php7.3-opcache
+              - button "Copy" [ref=e139] [cursor=pointer]
+            - paragraph [ref=e140]: 安装 PHP 7.2.x (PHP 7.2 开始已经不支持 mcrypt 组件)
+            - generic [ref=e141]:
+              - code [ref=e143]: apt install php7.2-fpm php7.2-mysql php7.2-curl php7.2-gd php7.2-mbstring php7.2-xml php7.2-xmlrpc php7.2-zip php7.2-opcache
+              - button "Copy" [ref=e145] [cursor=pointer]
+            - paragraph [ref=e146]: 安装 PHP 7.1.x
+            - generic [ref=e147]:
+              - code [ref=e149]: apt install php7.1-fpm php7.1-mysql php7.1-curl php7.1-gd php7.1-mbstring php7.1-mcrypt php7.1-xml php7.1-xmlrpc php7.1-zip php7.1-opcache
+              - button "Copy" [ref=e151] [cursor=pointer]
+            - paragraph [ref=e152]: 安装 PHP 7.0.x
+            - generic [ref=e153]:
+              - code [ref=e155]: apt install php7.0-fpm php7.0-mysql php7.0-curl php7.0-gd php7.0-mbstring php7.0-mcrypt php7.0-xml php7.0-xmlrpc php7.0-zip php7.0-opcache
+              - button "Copy" [ref=e157] [cursor=pointer]
+            - paragraph [ref=e158]: 安装 PHP 5.6.x
+            - generic [ref=e159]:
+              - code [ref=e161]: apt install php5.6-fpm php5.6-mysql php5.6-curl php5.6-gd php5.6-mbstring php5.6-mcrypt php5.6-xml php5.6-xmlrpc php5.6-zip php5.6-opcache
+              - button "Copy" [ref=e163] [cursor=pointer]
+            - paragraph [ref=e164]: 如果希望安装其他组件，可以通过搜索看看有没有对应的包
+            - generic [ref=e165]:
+              - code [ref=e167]: apt-cache search php8.5* | grep php8.5
+              - button "Copy" [ref=e169] [cursor=pointer]
+            - paragraph [ref=e170]:
+              - text: 修改
+              - code [ref=e171]: php.ini
+              - text: 防止跨目录攻击，如果安装的 PHP 8.5.x 请相应修改
+              - code [ref=e172]: /etc/php/8.5/fpm/php.ini
+              - text: PHP 7.4.x 请相应修改
+              - code [ref=e173]: /etc/php/7.4/fpm/php.ini
+            - generic [ref=e174]:
+              - code [ref=e176]: sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/' /etc/php/8.5/fpm/php.ini
+              - button "Copy" [ref=e178] [cursor=pointer]
+            - paragraph [ref=e179]:
+              - text: 修改
+              - code [ref=e180]: php.ini
+              - text: 增加上传大小限制
+            - generic [ref=e181]:
+              - code [ref=e183]: sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 10M/' /etc/php/8.5/fpm/php.ini sed -i 's/post_max_size = 8M/post_max_size = 10M/' /etc/php/8.5/fpm/php.ini
+              - button "Copy" [ref=e185] [cursor=pointer]
+            - paragraph [ref=e186]: 您也可以同时安装多个 PHP 版本，然后使用以下命令选择系统默认的 PHP 版本：
+            - generic [ref=e187]:
+              - code [ref=e189]: update-alternatives --config php
+              - button "Copy" [ref=e191] [cursor=pointer]
+            - heading "Permalink3、增加 Ondřej Surý 大神打包的 Apache 2 源并安装" [level=2] [ref=e192]:
+              - link "Permalink" [ref=e193] [cursor=pointer]:
+                - /url: "#3-zeng-jia-ondrej-sury-da-shen-da-bao-de-apache-2-yuan-bing-an-zhuang"
+                - text: "#"
+              - text: 3、增加 Ondřej Surý 大神打包的 Apache 2 源并安装
+            - paragraph [ref=e194]:
+              - text: 这里我们推荐
+              - link "Ondřej Surý" [ref=e195] [cursor=pointer]:
+                - /url: https://deb.sury.org/
+              - text: 打包的 Apache 2 源。
+            - heading "Permalink3.1 Debian 和 Ubuntu 安装 LAMP 区别" [level=3] [ref=e196]:
+              - link "Permalink" [ref=e197] [cursor=pointer]:
+                - /url: "#3-1-debian-he-ubuntu-an-zhuang-lamp-qu-bie"
+                - text: "#"
+              - text: 3.1 Debian 和 Ubuntu 安装 LAMP 区别
+            - paragraph [ref=e198]: 唯一区别就是 Apache 2 和 PHP 的安装添加源方法不一样，其他的步骤都一毛一样。
+            - heading "Permalink3.2 首先增加 Apache 源" [level=3] [ref=e199]:
+              - link "Permalink" [ref=e200] [cursor=pointer]:
+                - /url: "#3-2-shou-xian-zeng-jia-apache-yuan"
+                - text: "#"
+              - text: 3.2 首先增加 Apache 源
+            - generic [ref=e201]:
+              - generic [ref=e202]:
+                - button "Debian" [ref=e203] [cursor=pointer]
+                - button "Ubuntu" [ref=e204] [cursor=pointer]
+              - generic [ref=e207]:
+                - code [ref=e209]:
+                  - text: wget -O /usr/share/keyrings/apache2.gpg https://packages.sury.org/apache2/apt.gpg echo
+                  - generic [ref=e210]: "\"deb [signed-by=/usr/share/keyrings/apache2.gpg] https://packages.sury.org/apache2/ $(lsb_release -sc) main\""
+                  - text: "> /etc/apt/sources.list.d/apache2.list"
+                - button "Copy" [ref=e212] [cursor=pointer]
+            - paragraph [ref=e213]:
+              - text: Debian 下也可以直接使用
+              - link "extrepo" [ref=e214] [cursor=pointer]:
+                - /url: /debian-extrepo/
+              - text: ":"
+            - generic [ref=e215]:
+              - code [ref=e217]: sudo extrepo enable sury_apache2
+              - button "Copy" [ref=e219] [cursor=pointer]
+            - heading "Permalink3.3 接着更新并安装 Apache 2.4" [level=3] [ref=e220]:
+              - link "Permalink" [ref=e221] [cursor=pointer]:
+                - /url: "#3-3-jie-zhao-geng-xin-bing-an-zhuang-apache-2-4"
+                - text: "#"
+              - text: 3.3 接着更新并安装 Apache 2.4
+            - generic [ref=e222]:
+              - code [ref=e224]: apt update apt upgrade -y apt install apache2 -y
+              - button "Copy" [ref=e226] [cursor=pointer]
+            - paragraph [ref=e227]:
+              - text: 安装完毕后，我们可以使用
+              - code [ref=e228]: apachectl -v
+              - text: 命令看到 Apache 2 已经是最新的 2.4 版本了
+            - generic [ref=e229]:
+              - code [ref=e231]: "root@debian ~ # apachectl -v Server version: Apache/2.4.66 (Debian) Server built: 2025-12-05T14:35:42"
+              - button "Copy" [ref=e233] [cursor=pointer]
+            - heading "Permalink3.4 Apache 2 开启 PHP-FPM 支持" [level=3] [ref=e234]:
+              - link "Permalink" [ref=e235] [cursor=pointer]:
+                - /url: "#3-4-apache-2-kai-qi-php-fpm-zhi-chi"
+                - text: "#"
+              - text: 3.4 Apache 2 开启 PHP-FPM 支持
+            - paragraph [ref=e236]: 首先，需要开启 Apache 2 的 PHP-FPM 支持，我们以 PHP 8.5 为例，按照自己的需求，可以开启如下模块
+            - generic [ref=e237]:
+              - code [ref=e239]: a2enconf php8.5-fpm a2enmod proxy_fcgi a2enmod headers a2enmod http2 a2enmod remoteip a2enmod ssl a2enmod rewrite a2enmod expires a2enmod deflate a2enmod mime a2enmod setenvif
+              - button "Copy" [ref=e241] [cursor=pointer]
+            - paragraph [ref=e242]: 然后我们重启 PHP-FPM 服务
+            - generic [ref=e243]:
+              - code [ref=e245]: systemctl restart php8.5-fpm
+              - button "Copy" [ref=e247] [cursor=pointer]
+            - paragraph [ref=e248]: 对应 PHP 7.4.x 命令如下
+            - generic [ref=e249]:
+              - code [ref=e251]: systemctl restart php7.4-fpm
+              - button "Copy" [ref=e253] [cursor=pointer]
+            - paragraph [ref=e254]:
+              - text: Apache 2 参考配置文件如下，因为默认 Debian 的 Apache 2 默认配置已经使用了
+              - code [ref=e255]: example.com
+              - text: 这个域名，所以我们以
+              - code [ref=e256]: example.org
+              - text: 为例，新建立个
+              - code [ref=e257]: /etc/apache2/sites-available/example.org.conf
+            - generic [ref=e258]:
+              - code [ref=e260]: "cat >> /etc/apache2/sites-available/example.org.conf << EOF <VirtualHost *:80> ServerName example.org DocumentRoot /var/www/example.org DirectoryIndex index.php index.html index.htm ErrorLog ${APACHE_LOG_DIR}/example.org.error.log CustomLog ${APACHE_LOG_DIR}/example.org.access.log combined <Directory /var/www/example.org> Options FollowSymLinks AllowOverride All Require all granted </Directory> </VirtualHost> EOF"
+              - button "Copy" [ref=e262] [cursor=pointer]
+            - paragraph [ref=e263]:
+              - text: 然后使用
+              - code [ref=e264]: a2ensite
+              - text: 命令使其生效
+            - generic [ref=e265]:
+              - code [ref=e267]: a2ensite example.org.conf
+              - button "Copy" [ref=e269] [cursor=pointer]
+            - paragraph [ref=e270]:
+              - emphasis [ref=e271]:
+                - text: 如果不需要这个 vhost 的时候可以使用
+                - code [ref=e272]: a2dissite example.org.conf
+                - text: 命令移除
+            - paragraph [ref=e273]:
+              - text: 检测是否已经软链接到
+              - code [ref=e274]: /etc/apache2/sites-enabled
+              - text: 目录
+            - generic [ref=e275]:
+              - code [ref=e277]: "root@debian ~ # ls /etc/apache2/sites-enabled 000-default.conf example.org.conf"
+              - button "Copy" [ref=e279] [cursor=pointer]
+            - paragraph [ref=e280]:
+              - text: 到这里基本没有问题，我们可以执行
+              - code [ref=e281]: apache2ctl configtest
+              - text: 命令检查配置文件是否出错
+            - generic [ref=e282]:
+              - code [ref=e284]: "root@debian ~ # apache2ctl configtest Syntax OK"
+              - button "Copy" [ref=e286] [cursor=pointer]
+            - paragraph [ref=e287]:
+              - text: 显示
+              - code [ref=e288]: Syntax OK
+              - text: 则说明所有配置文件均无问题，可以重启 Apache 2 使我们的配置生效
+            - generic [ref=e289]:
+              - code [ref=e291]: systemctl restart apache2
+              - button "Copy" [ref=e293] [cursor=pointer]
+            - paragraph [ref=e294]:
+              - text: 我们的目录在
+              - code [ref=e295]: /var/www/example.org
+              - text: ，我们先创建这个目录
+            - generic [ref=e296]:
+              - code [ref=e298]: mkdir -p /var/www/example.org
+              - button "Copy" [ref=e300] [cursor=pointer]
+            - paragraph [ref=e301]:
+              - text: 然后创建一个
+              - code [ref=e302]: phpinfo.php
+              - text: 并输入
+              - code [ref=e303]: phpinfo()
+              - text: 函数
+            - generic [ref=e304]:
+              - code [ref=e306]: cat >> /var/www/example.org/phpinfo.php << EOF <?php phpinfo(); ?> EOF
+              - button "Copy" [ref=e308] [cursor=pointer]
+            - paragraph [ref=e309]:
+              - text: 好了，此时在浏览器输入
+              - code [ref=e310]: http://example.org/phpinfo.php
+              - text: ，如果看到经典的
+              - code [ref=e311]: phpinfo
+              - text: 页面则说明安装成功，如果不成功，请仔细对比步骤查找哪里出错或在烧饼博客下方留言。
+            - paragraph [ref=e312]: 最终效果如下：
+            - paragraph:
+              - img "image.png"
+            - heading "Permalink4、安装 MariaDB" [level=2] [ref=e313]:
+              - link "Permalink" [ref=e314] [cursor=pointer]:
+                - /url: "#4-an-zhuang-mariadb"
+                - text: "#"
+              - text: 4、安装 MariaDB
+            - paragraph [ref=e315]: 这里我们使用 MariaDB 作为 MySQL 的代替
+            - heading "Permalink4.1 首先，添加并导入 Mariadb 的官方源" [level=3] [ref=e316]:
+              - link "Permalink" [ref=e317] [cursor=pointer]:
+                - /url: "#4-1-shou-xian-tian-jia-bing-dao-ru-mariadb-de-guan-fang-yuan"
+                - text: "#"
+              - text: 4.1 首先，添加并导入 Mariadb 的官方源
+            - paragraph [ref=e318]:
+              - text: 按照官方的
+              - link "教程" [ref=e319] [cursor=pointer]:
+                - /url: https://mariadb.com/kb/en/gpg/
+              - text: 导入 GPG
+            - paragraph [ref=e320]: 下载 GPG Key：
+            - generic [ref=e321]:
+              - code [ref=e323]: curl -sSL https://supplychain.mariadb.com/MariaDB-Server-GPG-KEY | gpg --dearmor > /usr/share/keyrings/mariadb.gpg
+              - button "Copy" [ref=e325] [cursor=pointer]
+            - paragraph [ref=e326]: 然后添加 MariaDB 的源
+            - generic [ref=e327]:
+              - generic [ref=e328]:
+                - button "Debian" [ref=e329] [cursor=pointer]
+                - button "Ubuntu" [ref=e330] [cursor=pointer]
+              - generic [ref=e333]:
+                - code [ref=e335]:
+                  - text: echo
+                  - generic [ref=e336]: "\"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/mariadb.gpg] https://dlm.mariadb.com/repo/mariadb-server/11.8/repo/debian $(lsb_release -sc) main\""
+                  - text: "> /etc/apt/sources.list.d/mariadb.list"
+                - button "Copy" [ref=e338] [cursor=pointer]
+            - paragraph [ref=e339]:
+              - text: Debian 下也可以直接使用
+              - link "extrepo" [ref=e340] [cursor=pointer]:
+                - /url: /debian-extrepo/
+              - text: ":"
+            - generic [ref=e341]:
+              - code [ref=e343]: sudo extrepo enable mariadb-11.8
+              - button "Copy" [ref=e345] [cursor=pointer]
+            - paragraph [ref=e346]: 国内可以用清华 TUNA 的源
+            - generic [ref=e347]:
+              - generic [ref=e348]:
+                - button "Debian" [ref=e349] [cursor=pointer]
+                - button "Ubuntu" [ref=e350] [cursor=pointer]
+              - generic [ref=e353]:
+                - code [ref=e355]:
+                  - text: echo
+                  - generic [ref=e356]: "\"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/mariadb.gpg] https://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/11.8/debian $(lsb_release -sc) main\""
+                  - text: "> /etc/apt/sources.list.d/mariadb.list"
+                - button "Copy" [ref=e358] [cursor=pointer]
+            - paragraph [ref=e359]:
+              - text: 您也可以
+              - link "在这儿" [ref=e360] [cursor=pointer]:
+                - /url: https://mariadb.com/kb/en/mirror-sites-for-mariadb/
+              - text: 找到更多的 MariaDB 源
+            - heading "Permalink4.2 接着更新一下系统" [level=3] [ref=e361]:
+              - link "Permalink" [ref=e362] [cursor=pointer]:
+                - /url: "#4-2-jie-zhao-geng-xin-yi-xia-xi-tong"
+                - text: "#"
+              - text: 4.2 接着更新一下系统
+            - generic [ref=e363]:
+              - code [ref=e365]: apt update
+              - button "Copy" [ref=e367] [cursor=pointer]
+            - heading "Permalink4.3 然后直接安装最新稳定版 MariaDB" [level=3] [ref=e368]:
+              - link "Permalink" [ref=e369] [cursor=pointer]:
+                - /url: "#4-3-ran-hou-zhi-jie-an-zhuang-zui-xin-wen-ding-ban-mariadb"
+                - text: "#"
+              - text: 4.3 然后直接安装最新稳定版 MariaDB
+            - generic [ref=e370]:
+              - code [ref=e372]: apt install mariadb-server mariadb-client
+              - button "Copy" [ref=e374] [cursor=pointer]
+            - paragraph [ref=e375]:
+              - text: 安装完毕后强烈推荐使用
+              - code [ref=e376]: mariadb-secure-installation
+              - text: 命令做一次安全设置
+            - heading "Permalink4.4 创建数据库并测试" [level=3] [ref=e377]:
+              - link "Permalink" [ref=e378] [cursor=pointer]:
+                - /url: "#4-4-chuang-jian-shu-ju-ku-bing-ce-shi"
+                - text: "#"
+              - text: 4.4 创建数据库并测试
+            - paragraph [ref=e379]:
+              - emphasis [ref=e380]:
+                - text: 开启数据库之前，您可以使用
+                - code [ref=e381]: pwgen
+                - text: 这个小工具或者
+                - link "随机密码生成器" [ref=e382] [cursor=pointer]:
+                  - /url: https://ip.sb/password/
+                - text: 生成一个强大的随机密码，比如 32 位，然后随意挑选一个使用
+            - generic [ref=e383]:
+              - code [ref=e385]: apt install pwgen pwgen 32
+              - button "Copy" [ref=e387] [cursor=pointer]
+            - paragraph [ref=e388]: 使用 MySQL root 用户登陆，因为默认使用 Unix domain socket 模式，所以本机不需要 MySQL root 密码即可登录
+            - generic [ref=e389]:
+              - code [ref=e391]: mariadb -u root
+              - button "Copy" [ref=e393] [cursor=pointer]
+            - paragraph [ref=e394]:
+              - text: 创建数据库
+              - code [ref=e395]: example_database
+            - generic [ref=e396]:
+              - code [ref=e398]: CREATE DATABASE example_database DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+              - button "Copy" [ref=e400] [cursor=pointer]
+            - paragraph [ref=e401]:
+              - text: 创建用户名
+              - code [ref=e402]: example_user
+              - text: 并赋予权限
+            - generic [ref=e403]:
+              - code [ref=e405]: GRANT ALL ON example_database.* TO 'example_user'@'localhost' IDENTIFIED BY '这里改成您要设置的强大的没人能猜出来的随机的密码';
+              - button "Copy" [ref=e407] [cursor=pointer]
+            - paragraph [ref=e408]: 刷新 MySQL 权限
+            - generic [ref=e409]:
+              - code [ref=e411]: FLUSH PRIVILEGES;
+              - button "Copy" [ref=e413] [cursor=pointer]
+            - paragraph [ref=e414]: 没问题以后就可以退出了
+            - generic [ref=e415]:
+              - code [ref=e417]: EXIT;
+              - button "Copy" [ref=e419] [cursor=pointer]
+            - paragraph [ref=e420]:
+              - text: 新建立一个
+              - code [ref=e421]: /var/www/example.org/mysql-test.php
+              - text: 文件并测试
+            - generic [ref=e422]:
+              - code [ref=e424]: "cat >> /var/www/example.org/mysql-test.php << EOF <?php \\$dbname = 'example_database'; //MySQL 数据库名 \\$dbuser = 'example_user'; //MySQL 用户名 \\$dbpass = '您的强大的没人可以猜出来的密码'; \\$dbhost = 'localhost'; //安装在本地就用 localhost \\$link = mysqli_connect(\\$dbhost, \\$dbuser, \\$dbpass) or die(\"Unable to Connect to '\\$dbhost'\"); mysqli_select_db(\\$link, \\$dbname) or die(\"Could not open the db '\\$dbname'\"); \\$test_query = \"SHOW TABLES FROM \\$dbname\"; \\$result = mysqli_query(\\$link, \\$test_query); \\$tblCnt = 0; while(\\$tbl = mysqli_fetch_array(\\$result)) { \\$tblCnt++; #echo \\$tbl[0].\"&lt;br /&gt;\\n\"; } if (!\\$tblCnt) { echo \"MySQL is working fine. There are no tables.\"; } else { echo \"MySQL is working fine. There are \\$tblCnt tables.\"; } ?> EOF"
+              - button "Copy" [ref=e426] [cursor=pointer]
+            - paragraph [ref=e427]:
+              - text: 创建完毕后访问
+              - code [ref=e428]: http://example.org/mysql-test.php
+              - text: 如果出现
+              - code [ref=e429]: MySQL is working fine. There are no tables.
+              - text: 则说明 MySQL 工作正常。
+            - heading "Permalink5、安装 MySQL (可选)" [level=2] [ref=e430]:
+              - link "Permalink" [ref=e431] [cursor=pointer]:
+                - /url: "#5-an-zhuang-mysql-ke-xuan"
+                - text: "#"
+              - text: 5、安装 MySQL (可选)
+            - paragraph [ref=e432]:
+              - text: 如果您必须使用某些 MySQL 才有的功能，那么可以按照 MySQL
+              - link "官网的教程" [ref=e433] [cursor=pointer]:
+                - /url: https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/#apt-repo-fresh-install
+              - text: 安装 MySQL。
+            - paragraph [ref=e434]:
+              - emphasis [ref=e435]: 注意：除非您知道您在做什么，否则不要同时安装 MySQL 和 MariaDB。
+            - heading "Permalink5.1 添加 apt 源" [level=3] [ref=e436]:
+              - link "Permalink" [ref=e437] [cursor=pointer]:
+                - /url: "#5-1-tian-jia-apt-yuan"
+                - text: "#"
+              - text: 5.1 添加 apt 源
+            - generic [ref=e438]:
+              - code [ref=e440]: wget https://repo.mysql.com/mysql-apt-config_0.8.34-1_all.deb dpkg -i mysql-apt-config_0.8.34-1_all.deb
+              - button "Copy" [ref=e442] [cursor=pointer]
+            - paragraph [ref=e443]:
+              - text: 国内的机器可以在添加完成后修改为清华 TUNA 源，您可以修改
+              - code [ref=e444]: /etc/apt/sources.list.d/mysql-community.list
+              - text: 文件，替换成如下内容：
+            - generic [ref=e445]:
+              - code [ref=e447]: deb https://mirrors.tuna.tsinghua.edu.cn/mysql/apt/debian $(lsb_release -sc) mysql-8.0 mysql-8.4-lts mysql-apt-config mysql-tools
+              - button "Copy" [ref=e449] [cursor=pointer]
+            - paragraph [ref=e450]:
+              - text: Debian 下也可以直接使用
+              - link "extrepo" [ref=e451] [cursor=pointer]:
+                - /url: /debian-extrepo/
+              - text: ":"
+            - generic [ref=e452]:
+              - code [ref=e454]: sudo extrepo enable mysql-lts
+              - button "Copy" [ref=e456] [cursor=pointer]
+            - heading "Permalink5.2 安装 MySQL" [level=3] [ref=e457]:
+              - link "Permalink" [ref=e458] [cursor=pointer]:
+                - /url: "#5-2-an-zhuang-mysql"
+                - text: "#"
+              - text: 5.2 安装 MySQL
+            - generic [ref=e459]:
+              - code [ref=e461]: apt update apt install mysql-server -y
+              - button "Copy" [ref=e463] [cursor=pointer]
+            - paragraph [ref=e464]: 默认 MySQL 会安装最新的 8.4 版本，如果您需要更低的版本，比如 8.0，可以使用如下命令：
+            - generic [ref=e465]:
+              - code [ref=e467]: dpkg-reconfigure mysql-apt-config
+              - button "Copy" [ref=e469] [cursor=pointer]
+            - paragraph [ref=e470]:
+              - text: 您可能需要设置一个强大的 root 密码，接下来的步骤和 MariaDB 基本相同，把
+              - code [ref=e471]: mariadb
+              - text: 命令换成
+              - code [ref=e472]: mysql
+              - text: 命令即可，本文不再赘述。
+            - paragraph [ref=e473]: 好了，以上就是基本的 Debian 和 Ubuntu 安装最新版 LAMP 的教程，如有问题可以随时发评论留言讨论。
+      - generic [ref=e475]:
+        - generic [ref=e476]: Debian / Ubuntu 使用源安装 LAMP 教程
+        - link "https://u.sb/debian-install-apache-php-mysql/" [ref=e478] [cursor=pointer]:
+          - /url: /debian-install-apache-php-mysql/
+        - generic [ref=e479]:
+          - generic [ref=e480]:
+            - generic [ref=e481]: 无责任编辑
+            - generic [ref=e482]: Showfom
+          - generic [ref=e483]:
+            - generic [ref=e484]: 发布时间
+            - generic [ref=e485]: Jan 23rd, 2022
+          - generic [ref=e486]:
+            - generic [ref=e487]: 最后编辑时间
+            - generic [ref=e488]: Jan 18th, 2026
+          - generic [ref=e489]:
+            - generic [ref=e490]: 版权协议
+            - link "WTFPL" [ref=e492] [cursor=pointer]:
+              - /url: https://u.sb/license.txt
+      - generic [ref=e493]:
+        - link "#debian" [ref=e494] [cursor=pointer]:
+          - /url: /tags/debian/
+        - link "#ubuntu" [ref=e495] [cursor=pointer]:
+          - /url: /tags/ubuntu/
+        - link "#apache" [ref=e496] [cursor=pointer]:
+          - /url: /tags/apache/
+        - link "#php" [ref=e497] [cursor=pointer]:
+          - /url: /tags/php/
+        - link "#mysql" [ref=e498] [cursor=pointer]:
+          - /url: /tags/mysql/
+        - link "#mariadb" [ref=e499] [cursor=pointer]:
+          - /url: /tags/mariadb/
+  - generic [ref=e500]:
+    - button "Back to Top" [ref=e501] [cursor=pointer]:
+      - img [ref=e502]
+    - button "显示目录" [ref=e504] [cursor=pointer]:
+      - img [ref=e505]
+  - contentinfo [ref=e507]:
+    - generic [ref=e510]:
+      - text: Copyright © 2026 烧饼博客
+      - generic [ref=e511]: ·
+      - generic [ref=e512]: 关注我们
+      - generic [ref=e513]:
+        - link "Visit Showfom's profile on X" [ref=e514] [cursor=pointer]:
+          - /url: https://x.com/showfom
+          - img [ref=e515]
+        - link "Visit Showfom's profile on Mastodon" [ref=e517] [cursor=pointer]:
+          - /url: https://acg.mn/@Showfom
+          - img [ref=e518]
+        - link "Visit Showfom's profile on Bluesky" [ref=e520] [cursor=pointer]:
+          - /url: https://bsky.app/profile/u.sb
+          - img [ref=e521]
+  - alert [ref=e523]

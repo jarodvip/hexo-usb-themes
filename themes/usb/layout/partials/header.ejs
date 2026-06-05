@@ -1,0 +1,49 @@
+<header class="header">
+  <div class="header-inner">
+    <a href="<%- url_for(config.root) %>" class="logo"><%= theme.site_name || config.title %></a>
+
+    <button class="hamburger" id="menu-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav" id="main-nav">
+      <%
+        var menu = theme.menu || {};
+        var menuKeys = Object.keys(menu);
+        for (var i = 0; i < menuKeys.length; i++) {
+          var name = menuKeys[i];
+          var path = menu[name];
+          var isActive = (path === '/' && page.base === '/') || (path !== '/' && page.path.startsWith(path.replace(/^\//, '')));
+      %>
+        <a href="<%- url_for(path) %>" class="nav-item<%= isActive ? ' nav-item-active' : '' %>"><%- name %></a>
+      <% } %>
+      <a href="<%- url_for('atom.xml') %>" class="nav-item" title="RSS">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var toggle = document.getElementById('menu-toggle');
+    var nav = document.getElementById('main-nav');
+    if (toggle && nav) {
+      toggle.addEventListener('click', function() {
+        nav.classList.toggle('nav-open');
+        toggle.classList.toggle('active');
+      });
+      var navLinks = nav.querySelectorAll('.nav-item');
+      for (var i = 0; i < navLinks.length; i++) {
+        navLinks[i].addEventListener('click', function() {
+          if (window.innerWidth < 768) {
+            nav.classList.remove('nav-open');
+            toggle.classList.remove('active');
+          }
+        });
+      }
+    }
+  });
+</script>

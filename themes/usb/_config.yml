@@ -1,0 +1,53 @@
+# Theme: USB (烧饼博客像素级复刻)
+# 基于 u.sb 设计
+
+# 站点信息
+site_name: 烧饼博客
+author: 烧饼
+
+# 主题颜色
+accent_color: "#ffdb33"
+
+# 导航菜单 (key: 显示名称, value: 链接)
+menu:
+  首页: /
+  标签: /tags
+  归档: /archives
+  友链: /
+  关于: /about
+  联系: /contact
+  捐赠: /donate
+  免责声明: /disclaimer
+
+# 社交链接 (显示为 footer 图标)
+social:
+  - name: X
+    url: https://twitter.com/
+    icon: x
+  - name: Mastodon
+    url: https://mastodon.social/
+    icon: mastodon
+  - name: Bluesky
+    url: https://bsky.app/
+    icon: bluesky
+
+# 每页文章数
+per_page: 10
+
+# 文章摘要长度（字符数）
+excerpt_length: 200
+
+# 是否显示文章封面图
+show_cover: true
+
+# 是否显示标签
+show_tags: true
+
+# 是否显示阅读更多链接
+show_read_more: true
+
+# 是否显示回顶按钮
+show_back_to_top: true
+
+# Google Analytics (留空则禁用)
+google_analytics: ""

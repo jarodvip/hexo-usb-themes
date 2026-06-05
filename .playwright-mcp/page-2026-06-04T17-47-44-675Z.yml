@@ -1,0 +1,190 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "烧饼博客" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - navigation [ref=e5]:
+        - link "首页" [ref=e6] [cursor=pointer]:
+          - /url: /
+        - link "标签" [ref=e7] [cursor=pointer]:
+          - /url: /tags
+        - link "归档" [ref=e8] [cursor=pointer]:
+          - /url: /archives
+        - link "友链" [ref=e9] [cursor=pointer]:
+          - /url: /
+        - link "关于" [ref=e10] [cursor=pointer]:
+          - /url: /about
+        - link "联系" [ref=e11] [cursor=pointer]:
+          - /url: /contact
+        - link "捐赠" [ref=e12] [cursor=pointer]:
+          - /url: /donate
+        - link "免责声明" [ref=e13] [cursor=pointer]:
+          - /url: /disclaimer
+        - link "RSS" [ref=e14] [cursor=pointer]:
+          - /url: /atom.xml
+          - img [ref=e15]
+  - generic [ref=e20]:
+    - generic [ref=e21]:
+      - article [ref=e22]:
+        - link "Hello World" [ref=e23] [cursor=pointer]:
+          - /url: /2026/06/05/hello-world/
+          - img "Hello World" [ref=e24]
+        - generic [ref=e25]:
+          - heading "Hello World" [level=2] [ref=e26]
+          - paragraph [ref=e27]: Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick…
+          - generic [ref=e28]:
+            - link "入门" [ref=e29] [cursor=pointer]:
+              - /url: /tags/%E5%85%A5%E9%97%A8/
+              - generic [ref=e30]: 入门
+            - link "Hexo" [ref=e31] [cursor=pointer]:
+              - /url: /tags/Hexo/
+              - generic [ref=e32]: Hexo
+          - generic [ref=e33]:
+            - time [ref=e34]: 2026-06-05
+            - link "阅读" [ref=e35] [cursor=pointer]:
+              - /url: /2026/06/05/hello-world/
+              - text: 阅读
+              - img [ref=e36]
+      - article [ref=e38]:
+        - link "Debian / Ubuntu 下使用 nginx-acme 自动签发并配置 SSL 证书" [ref=e39] [cursor=pointer]:
+          - /url: /2026/05/20/debian-nginx-acme/
+          - img "Debian / Ubuntu 下使用 nginx-acme 自动签发并配置 SSL 证书" [ref=e40]
+        - generic [ref=e41]:
+          - heading "Debian / Ubuntu 下使用 nginx-acme 自动签发并配置 SSL 证书" [level=2] [ref=e42]
+          - paragraph [ref=e43]: 本文将介绍在 Debian 或 Ubuntu 下使用 nginx-acme 自动签发并配置 SSL 证书的方法。 本文适合 Debian Stable 和 Ubuntu LTS，请使用 root 用户进行操作。 1、什么是 nginx-acmenginx-acme 是 Nginx 官方开发的基于 ACME 协议自动签发 SSL 证书的模块，隔壁 Caddy 都出了几百年的功能， Nginx 也终于…
+          - generic [ref=e44]:
+            - time [ref=e45]: 2026-05-20
+            - link "阅读" [ref=e46] [cursor=pointer]:
+              - /url: /2026/05/20/debian-nginx-acme/
+              - text: 阅读
+              - img [ref=e47]
+      - article [ref=e49]:
+        - link "Ubuntu 24.04 Noble 升级 Ubuntu 26.04 Resolute" [ref=e50] [cursor=pointer]:
+          - /url: /2026/05/19/ubuntu-upgrade-2604/
+          - img "Ubuntu 24.04 Noble 升级 Ubuntu 26.04 Resolute" [ref=e51]
+        - generic [ref=e52]:
+          - heading "Ubuntu 24.04 Noble 升级 Ubuntu 26.04 Resolute" [level=2] [ref=e53]
+          - paragraph [ref=e54]: 本文将指导如何升级 Ubuntu 24.04 Noble Numbat 到 Ubuntu 26.04 Resolute Raccoon。 相关教程：Ubuntu 22.04 Jammy 升级 Ubuntu 24.04 Noble。 准备工作除非你是物理服务器，以及没有用过奇奇怪怪定制或修改的内核的 KVM 构架的 VPS 和云主机，否则升级大版本更新内核是有一定机率导致 Grub 加载失败的，切记…
+          - generic [ref=e55]:
+            - time [ref=e56]: 2026-05-19
+            - link "阅读" [ref=e57] [cursor=pointer]:
+              - /url: /2026/05/19/ubuntu-upgrade-2604/
+              - text: 阅读
+              - img [ref=e58]
+      - article [ref=e60]:
+        - link "WSL 2 使用 Docker 桥接模式网络访问 HTTPS 超时的解决方法" [ref=e61] [cursor=pointer]:
+          - /url: /2026/01/21/fix-wsl-2-docker-network/
+          - img "WSL 2 使用 Docker 桥接模式网络访问 HTTPS 超时的解决方法" [ref=e62]
+        - generic [ref=e63]:
+          - heading "WSL 2 使用 Docker 桥接模式网络访问 HTTPS 超时的解决方法" [level=2] [ref=e64]
+          - paragraph [ref=e65]: 本文介绍在 WSL 2 中使用 Docker 的桥接模式（bridge network）访问 HTTPS 时出现超时问题的解决方法。 最近一直在 Windows 下使用基于 WSL 2 的 Debian 进行开发。许多场景下需要使用 Docker 构建镜像，但过程中遇到一个奇怪的问题，在 Docker 容器内部访问 HTTP 站点时一切正常： $ docker run --rm curlimage…
+          - generic [ref=e66]:
+            - time [ref=e67]: 2026-01-21
+            - link "阅读" [ref=e68] [cursor=pointer]:
+              - /url: /2026/01/21/fix-wsl-2-docker-network/
+              - text: 阅读
+              - img [ref=e69]
+      - article [ref=e71]:
+        - link "Debian / Ubuntu 使用源安装 LAMP 教程" [ref=e72] [cursor=pointer]:
+          - /url: /2026/01/18/debian-install-apache-php-mysql/
+          - img "Debian / Ubuntu 使用源安装 LAMP 教程" [ref=e73]
+        - generic [ref=e74]:
+          - heading "Debian / Ubuntu 使用源安装 LAMP 教程" [level=2] [ref=e75]
+          - paragraph [ref=e76]: 本文将介绍使用官方源和第三方源在 Debian 和 Ubuntu 安装最新版 Apache 2 + PHP + MySQL 的教程，并且可以自行选择 PHP 版本。 PS：本文适用于 Debian Stable 以及 Ubuntu LTS 以下操作需要在 root 用户下完成，请使用 sudo -i 或 su root 切换到 root 用户进行操作。 1、更新系统并安装部分必要软件apt upd…
+          - generic [ref=e77]:
+            - time [ref=e78]: 2026-01-18
+            - link "阅读" [ref=e79] [cursor=pointer]:
+              - /url: /2026/01/18/debian-install-apache-php-mysql/
+              - text: 阅读
+              - img [ref=e80]
+      - article [ref=e82]:
+        - link "Debian / Ubuntu 使用源安装 LEMP 教程" [ref=e83] [cursor=pointer]:
+          - /url: /2026/01/18/debian-install-nginx-php-mysql/
+          - img "Debian / Ubuntu 使用源安装 LEMP 教程" [ref=e84]
+        - generic [ref=e85]:
+          - heading "Debian / Ubuntu 使用源安装 LEMP 教程" [level=2] [ref=e86]
+          - paragraph [ref=e87]: 本文将介绍使用官方源和第三方源在 Debian 和 Ubuntu 安装最新版 Nginx + PHP + MySQL 的教程，并且可以自行选择 PHP 版本。 PS：本文适用于 Debian Stable 以及 Ubuntu LTS 以下操作需要在 root 用户下完成，请使用 sudo -i 或 su root 切换到 root 用户进行操作。 1、更新系统并安装部分必要软件apt update…
+          - generic [ref=e88]:
+            - time [ref=e89]: 2026-01-18
+            - link "阅读" [ref=e90] [cursor=pointer]:
+              - /url: /2026/01/18/debian-install-nginx-php-mysql/
+              - text: 阅读
+              - img [ref=e91]
+      - article [ref=e93]:
+        - link "Docker 安装 Shlink 自建短网址" [ref=e94] [cursor=pointer]:
+          - /url: /2026/01/18/docker-shlink/
+          - img "Docker 安装 Shlink 自建短网址" [ref=e95]
+        - generic [ref=e96]:
+          - heading "Docker 安装 Shlink 自建短网址" [level=2] [ref=e97]
+          - paragraph [ref=e98]: 本文将指导使用 Docker 安装 Shlink 搭建自建短网址服务。 PS：本文同时适用于任何可安装 Docker 的 Linux 发行版。 什么是短网址？短网址，即 URL Shortener (缩略网址服务)，一般我们使用 HTTP 协议 的 301 或 302 响应码，现在也有使用 307 或 308 来跳转一个长网址，简单的区别： MDN 上有对这几个状态码的详细介绍： 301 Mov…
+          - generic [ref=e99]:
+            - time [ref=e100]: 2026-01-18
+            - link "阅读" [ref=e101] [cursor=pointer]:
+              - /url: /2026/01/18/docker-shlink/
+              - text: 阅读
+              - img [ref=e102]
+      - article [ref=e104]:
+        - link "使用 acme.sh 配置 Let's Encrypt 签发的 IP 地址 SSL 证书" [ref=e105] [cursor=pointer]:
+          - /url: /2025/12/17/acme-sh-ip-ssl/
+          - img "使用 acme.sh 配置 Let's Encrypt 签发的 IP 地址 SSL 证书" [ref=e106]
+        - generic [ref=e107]:
+          - heading "使用 acme.sh 配置 Let's Encrypt 签发的 IP 地址 SSL 证书" [level=2] [ref=e108]
+          - paragraph [ref=e109]: 本文将介绍使用 acme.sh 配置 Let’s Encrypt 为 IP 地址签发 SSL 证书。 之前写过一篇使用 acme.sh 签发证书的教程，但在很长一段时间里，Let’s Encrypt 只能给域名签发证书。 经过几个月的测试之后，现在终于可以对 IP 地址 下手了。 为什么要给 IP 签发证书在很多场景下，我们并不一定需要域名，但确实需要 HTTPS。比如： DNS over HT…
+          - generic [ref=e110]:
+            - time [ref=e111]: 2025-12-17
+            - link "阅读" [ref=e112] [cursor=pointer]:
+              - /url: /2025/12/17/acme-sh-ip-ssl/
+              - text: 阅读
+              - img [ref=e113]
+      - article [ref=e115]:
+        - link "Debian 双栈网络时开启 IPv4 优先" [ref=e116] [cursor=pointer]:
+          - /url: /2025/11/04/debian-prefer-ipv4/
+          - img "Debian 双栈网络时开启 IPv4 优先" [ref=e117]
+        - generic [ref=e118]:
+          - heading "Debian 双栈网络时开启 IPv4 优先" [level=2] [ref=e119]
+          - paragraph [ref=e120]: 本文原理适用于大多数 Linux 系统，其他系统尚未测试，请读者自行验证。 背景介绍双协议栈技术就是指在一台设备上同时启用 IPv4 协议栈和 IPv6 协议栈，这样就可以同时使用 IPv4 和 IPv6 的网络。 现代操作系统和浏览器通常会优先使用 IPv6，只有当 IPv6 无法访问时，才会回退到 IPv4。但在某些特定的应用或场景中，我们可能更希望系统优先使用 IPv4，这时就需要通过配置文…
+          - generic [ref=e121]:
+            - time [ref=e122]: 2025-11-04
+            - link "阅读" [ref=e123] [cursor=pointer]:
+              - /url: /2025/11/04/debian-prefer-ipv4/
+              - text: 阅读
+              - img [ref=e124]
+      - article [ref=e126]:
+        - link "RDAP.SS - 基于 RDAP 协议的 Whois 查询网站" [ref=e127] [cursor=pointer]:
+          - /url: /2025/11/03/rdap-ss/
+          - img "RDAP.SS - 基于 RDAP 协议的 Whois 查询网站" [ref=e128]
+        - generic [ref=e129]:
+          - heading "RDAP.SS - 基于 RDAP 协议的 Whois 查询网站" [level=2] [ref=e130]
+          - paragraph [ref=e131]: RDAP.SS 是一个基于 RDAP 协议的 Whois 查询网站，本文介绍 RDAP 协议以及如何使用。 1、什么是 RDAP 协议？RDAP，全称 Registration Data Access Protocol，由 IETF（互联网工程任务组）制定，主要用于查询以下注册信息： 域名（Domain） IP 地址（IPv4 / IPv6） ASN（自治系统号） 它定义在 R…
+          - generic [ref=e132]:
+            - time [ref=e133]: 2025-11-03
+            - link "阅读" [ref=e134] [cursor=pointer]:
+              - /url: /2025/11/03/rdap-ss/
+              - text: 阅读
+              - img [ref=e135]
+    - navigation [ref=e137]:
+      - generic [ref=e138]: "1"
+      - link "2" [ref=e139] [cursor=pointer]:
+        - /url: /page/2/
+      - link "3" [ref=e140] [cursor=pointer]:
+        - /url: /page/3/
+      - link "4" [ref=e141] [cursor=pointer]:
+        - /url: /page/4/
+      - link "5" [ref=e142] [cursor=pointer]:
+        - /url: /page/5/
+      - link ">" [ref=e143] [cursor=pointer]:
+        - /url: /2
+  - contentinfo [ref=e144]:
+    - generic [ref=e145]:
+      - generic [ref=e146]: Copyright 2026 烧饼博客
+      - generic [ref=e148]: 关注我们
+      - generic [ref=e149]:
+        - link "X" [ref=e150] [cursor=pointer]:
+          - /url: https://twitter.com/
+          - img [ref=e151]
+        - link "Mastodon" [ref=e153] [cursor=pointer]:
+          - /url: https://mastodon.social/
+          - img [ref=e154]
+        - link "Bluesky" [ref=e156] [cursor=pointer]:
+          - /url: https://bsky.app/
+          - img [ref=e157]

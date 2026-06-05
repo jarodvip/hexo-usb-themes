@@ -1,0 +1,262 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "烧饼博客" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - navigation [ref=e5]:
+        - link "首页" [ref=e6] [cursor=pointer]:
+          - /url: /
+        - link "标签" [ref=e7] [cursor=pointer]:
+          - /url: /tags
+        - link "归档" [ref=e8] [cursor=pointer]:
+          - /url: /archives
+        - link "友链" [ref=e9] [cursor=pointer]:
+          - /url: /
+        - link "关于" [ref=e10] [cursor=pointer]:
+          - /url: /about
+        - link "联系" [ref=e11] [cursor=pointer]:
+          - /url: /contact
+        - link "捐赠" [ref=e12] [cursor=pointer]:
+          - /url: /donate
+        - link "免责声明" [ref=e13] [cursor=pointer]:
+          - /url: /disclaimer
+        - link "RSS" [ref=e14] [cursor=pointer]:
+          - /url: /atom.xml
+          - img [ref=e15]
+  - generic [ref=e19]:
+    - generic [ref=e20]:
+      - article [ref=e22]:
+        - link "Debian 使用 extrepo 配置第三方软件源" [ref=e23] [cursor=pointer]:
+          - /url: /2025/10/20/debian-extrepo/
+          - img "Debian 使用 extrepo 配置第三方软件源" [ref=e24]
+        - generic [ref=e25]:
+          - heading "Debian 使用 extrepo 配置第三方软件源" [level=2] [ref=e26]
+          - paragraph
+          - paragraph [ref=e27]: 本文将指导如何在 Debian 下使用 extrepo 配置第三方软件源。
+          - heading "什么是 extrepo？什么是 extrepo？" [level=1] [ref=e28]:
+            - link "什么是 extrepo？":
+              - /url: "#什么是-extrepo？"
+            - text: 什么是 extrepo？
+          - paragraph [ref=e29]:
+            - link "2025-10-20" [ref=e30] [cursor=pointer]:
+              - /url: "https://packages.debian.org/stable/e…\n        \n      </p>\n      \n      <div class="
+              - time [ref=e31]: 2025-10-20
+            - link "阅读" [ref=e32] [cursor=pointer]:
+              - /url: /2025/10/20/debian-extrepo/
+              - text: 阅读
+              - img [ref=e33]
+      - article [ref=e35]:
+        - link "Debian 安装 Nextcloud 服务端" [ref=e36] [cursor=pointer]:
+          - /url: /2025/10/20/debian-nextcloud/
+          - img "Debian 安装 Nextcloud 服务端" [ref=e37]
+        - generic [ref=e38]:
+          - heading "Debian 安装 Nextcloud 服务端" [level=2] [ref=e39]
+          - paragraph
+          - paragraph [ref=e40]: 本文将指导如何在 Debian 下安装并配置 Nextcloud 服务端。
+          - paragraph [ref=e41]:
+            - text: 本文的教程同时适用于
+            - link "Debian Stable" [ref=e42] [cursor=pointer]:
+              - /url: https://www.debian.org/releases/stable/
+            - text: 以及
+            - link "Ubuntu LTS" [ref=e43] [cursor=pointer]:
+              - /url: https://releases.ubuntu.com/
+            - text: 。
+          - paragraph [ref=e44]: 以下操作需要在 …
+          - generic [ref=e45]:
+            - time [ref=e46]: 2025-10-20
+            - link "阅读" [ref=e47] [cursor=pointer]:
+              - /url: /2025/10/20/debian-nextcloud/
+              - text: 阅读
+              - img [ref=e48]
+      - article [ref=e50]:
+        - link "升级 Debian 后 GitLab PostgreSQL 无法启动的解决方法" [ref=e51] [cursor=pointer]:
+          - /url: /2025/09/16/fix-gitlab-postgresql-not-starting-debian-upgrade/
+          - img "升级 Debian 后 GitLab PostgreSQL 无法启动的解决方法" [ref=e52]
+        - generic [ref=e53]:
+          - heading "升级 Debian 后 GitLab PostgreSQL 无法启动的解决方法" [level=2] [ref=e54]
+          - paragraph
+          - paragraph [ref=e55]: 本文将介绍在升级 Debian 系统后，GitLab 的 PostgreSQL 数据库无法正常启动的问题。
+          - heading "背景前提背景前提" [level=1] [ref=e56]:
+            - link "背景前提":
+              - /url: "#背景前提"
+            - text: 背景前提
+          - paragraph [ref=e57]:
+            - strong [ref=e58]: 本文的 GitLab 是基于官方源安装的，具体安装和升级方法限于篇幅，不再阐述。
+          - text: …
+          - paragraph
+          - generic [ref=e59]:
+            - time [ref=e60]: 2025-09-16
+            - link "阅读" [ref=e61] [cursor=pointer]:
+              - /url: /2025/09/16/fix-gitlab-postgresql-not-starting-debian-upgrade/
+              - text: 阅读
+              - img [ref=e62]
+      - article [ref=e64]:
+        - link "Debian 12 Bookworm 升级 Debian 13 Trixie" [ref=e65] [cursor=pointer]:
+          - /url: /2025/08/05/debian-upgrade-13/
+          - img "Debian 12 Bookworm 升级 Debian 13 Trixie" [ref=e66]
+        - generic [ref=e67]:
+          - heading "Debian 12 Bookworm 升级 Debian 13 Trixie" [level=2] [ref=e68]
+          - paragraph
+          - paragraph [ref=e69]: 本文将指导如何升级 Debian 12 Bookworm 到 Debian 13 Trixie。
+          - paragraph [ref=e70]:
+            - text: 相关教程：
+            - link "Debian 11 Bullseye 升级 Debian 12 Bookworm" [ref=e71] [cursor=pointer]:
+              - /url: /debian-upgrade-12/
+            - text: 。
+          - heading "2025-08-05 阅读" [level=1] [ref=e72]:
+            - link "2025-08-05" [ref=e73] [cursor=pointer]:
+              - /url: "#准备工作"
+              - time [ref=e74]: 2025-08-05
+            - link "阅读" [ref=e75] [cursor=pointer]:
+              - /url: /2025/08/05/debian-upgrade-13/
+              - text: 阅读
+              - img [ref=e76]
+    - article [ref=e78]:
+      - link "Debian / Ubuntu 安装 Docker 以及 Docker Compose 教程" [ref=e79] [cursor=pointer]:
+        - /url: /2024/06/21/debian-install-docker/
+        - img "Debian / Ubuntu 安装 Docker 以及 Docker Compose 教程" [ref=e80]
+      - generic [ref=e81]:
+        - heading "Debian / Ubuntu 安装 Docker 以及 Docker Compose 教程" [level=2] [ref=e82]
+        - paragraph
+        - paragraph [ref=e83]: 本文将指导如何在 Debian 和 Ubuntu 下安装 Docker 以及 Docker Compose。
+        - paragraph [ref=e84]:
+          - emphasis [ref=e85]: PS：本文适用于 Debian Stable 以及 Ubuntu LTS
+        - heading "2024-06-21 阅读" [level=1] [ref=e86]:
+          - link "什么是 Docker？":
+            - /url: "#什么是-Docker？"
+          - generic [ref=e87]:
+            - link "2024-06-21" [ref=e88] [cursor=pointer]:
+              - /url: "#什么是-Docker？"
+              - time [ref=e89]: 2024-06-21
+            - link "阅读" [ref=e90] [cursor=pointer]:
+              - /url: /2024/06/21/debian-install-docker/
+              - text: 阅读
+              - img [ref=e91]
+    - article [ref=e93]:
+      - link "Docker 安装 FreshRSS 教程" [ref=e94] [cursor=pointer]:
+        - /url: /2024/06/21/docker-freshrss/
+        - img "Docker 安装 FreshRSS 教程" [ref=e95]
+      - generic [ref=e96]:
+        - heading "Docker 安装 FreshRSS 教程" [level=2] [ref=e97]
+        - paragraph
+        - paragraph [ref=e98]: 本文将指导如何在 Linux 下使用 Docker 和 Docker Compose 安装 FreshRSS 开源 RSS 聚合器服务。
+        - paragraph [ref=e99]:
+          - emphasis [ref=e100]: PS：本文同时适用于任何可安装 Docker 的 Linux 发行版。
+        - heading "2024-06-21 阅读" [level=1] [ref=e101]:
+          - link:
+            - /url: "#什么是-FreshRSS？"
+          - generic [ref=e102]:
+            - link "2024-06-21" [ref=e103] [cursor=pointer]:
+              - /url: "#什么是-FreshRSS？"
+              - time [ref=e104]: 2024-06-21
+            - link "阅读" [ref=e105] [cursor=pointer]:
+              - /url: /2024/06/21/docker-freshrss/
+              - text: 阅读
+              - img [ref=e106]
+    - article [ref=e108]:
+      - link "Ubuntu 22.04 Jammy 升级 Ubuntu 24.04 Noble" [ref=e109] [cursor=pointer]:
+        - /url: /2024/06/21/ubuntu-upgrade-2404/
+        - img "Ubuntu 22.04 Jammy 升级 Ubuntu 24.04 Noble" [ref=e110]
+      - generic [ref=e111]:
+        - heading "Ubuntu 22.04 Jammy 升级 Ubuntu 24.04 Noble" [level=2] [ref=e112]
+        - paragraph
+        - paragraph [ref=e113]: 本文将指导如何升级 Ubuntu 22.04 Jammy Jellyfish 到 Ubuntu 24.04 Noble Numbat。
+        - paragraph [ref=e114]:
+          - text: 相关教程：
+          - link "Ubuntu 20.04 Focal Fossa 升级 Ubuntu 22.04 Jammy Jellyfish" [ref=e115] [cursor=pointer]:
+            - /url: /ubuntu-upgrade/
+          - text: 。
+        - heading "2024-06-21 阅读" [level=1] [ref=e116]:
+          - link "2024-06-21" [ref=e117] [cursor=pointer]:
+            - /url: "#…\n        \n      </p>\n      \n      <div class="
+            - time [ref=e118]: 2024-06-21
+          - link "阅读" [ref=e119] [cursor=pointer]:
+            - /url: /2024/06/21/ubuntu-upgrade-2404/
+            - text: 阅读
+            - img [ref=e120]
+  - article [ref=e122]:
+    - link "Debian / Ubuntu 安装 PowerDNS 和 PowerDNS-Admin 自建权威 DNS 教程" [ref=e123] [cursor=pointer]:
+      - /url: /2024/04/04/debian-install-powerdns/
+      - img "Debian / Ubuntu 安装 PowerDNS 和 PowerDNS-Admin 自建权威 DNS 教程" [ref=e124]
+    - generic [ref=e125]:
+      - heading "Debian / Ubuntu 安装 PowerDNS 和 PowerDNS-Admin 自建权威 DNS 教程" [level=2] [ref=e126]
+      - paragraph
+      - paragraph [ref=e127]: 本文将指导如何在 Debian 和 Ubuntu 下安装 PowerDNS 以及 PowerDNS-Admin，本教程略复杂，学习者需要有一定的 Linux 运维经验以及熟读本站之前的教程。
+      - paragraph [ref=e128]:
+        - text: 本文的教程同时适用于
+        - link "Debian Stable" [ref=e129] [cursor=pointer]:
+          - /url: https://www.debian.org/releases/stable/
+        - text: 以及
+        - link "2024-04-04" [ref=e130] [cursor=pointer]:
+          - /url: "htt…\n        \n      </p>\n      \n      <div class="
+          - time [ref=e131]: 2024-04-04
+        - link "阅读" [ref=e132] [cursor=pointer]:
+          - /url: /2024/04/04/debian-install-powerdns/
+          - text: 阅读
+          - img [ref=e133]
+  - article [ref=e135]:
+    - link "Debian / Ubuntu 下使用 HTTP/3 协议的 Nginx QUIC" [ref=e136] [cursor=pointer]:
+      - /url: /2023/08/02/debian-nginx-quic/
+      - img "Debian / Ubuntu 下使用 HTTP/3 协议的 Nginx QUIC" [ref=e137]
+    - generic [ref=e138]:
+      - heading "Debian / Ubuntu 下使用 HTTP/3 协议的 Nginx QUIC" [level=2] [ref=e139]
+      - paragraph
+      - paragraph [ref=e140]: 本文适合 Debian Stable 和 Ubuntu LTS，请使用 root 用户进行操作。
+      - heading "1、什么是 HTTP/3 和 QUIC？1、什么是 HTTP/3 和 QUIC？… 2023-08-02 阅读" [level=1] [ref=e141]:
+        - link "1、什么是 HTTP/3 和 QUIC？":
+          - /url: "#1、什么是-HTTP-3-和-QUIC？"
+        - text: 1、什么是 HTTP/3 和 QUIC？…
+        - paragraph
+        - generic [ref=e142]:
+          - time [ref=e143]: 2023-08-02
+          - link "阅读" [ref=e144] [cursor=pointer]:
+            - /url: /2023/08/02/debian-nginx-quic/
+            - text: 阅读
+            - img [ref=e145]
+  - article [ref=e147]:
+    - link "Nginx 配置 SSL 证书" [ref=e148] [cursor=pointer]:
+      - /url: /2023/08/02/nginx-ssl/
+      - img "Nginx 配置 SSL 证书" [ref=e149]
+    - generic [ref=e150]:
+      - heading "Nginx 配置 SSL 证书" [level=2] [ref=e151]
+      - paragraph
+      - paragraph [ref=e152]: 本文将介绍购买 SSL 证书并在 Nginx 配置的姿势。
+      - heading "免费证书和收费证书的区别免费证书和收费证书的区别" [level=1] [ref=e153]:
+        - link "免费证书和收费证书的区别":
+          - /url: "#免费证书和收费证书的区别"
+        - text: 免费证书和收费证书的区别
+      - paragraph [ref=e154]: 首先，免费的 SSL 证书是没有保险的，也没有 SLA 保障，适合个人项目以及短期的网站，对于长期运营的网…
+      - generic [ref=e155]:
+        - time [ref=e156]: 2023-08-02
+        - link "阅读" [ref=e157] [cursor=pointer]:
+          - /url: /2023/08/02/nginx-ssl/
+          - text: 阅读
+          - img [ref=e158]
+  - navigation [ref=e160]:
+    - link "1" [ref=e161] [cursor=pointer]:
+      - /url: /
+    - generic [ref=e162]: "2"
+    - link "3" [ref=e163] [cursor=pointer]:
+      - /url: /page/3/
+    - link "4" [ref=e164] [cursor=pointer]:
+      - /url: /page/4/
+    - link "5" [ref=e165] [cursor=pointer]:
+      - /url: /page/5/
+    - link "<" [ref=e166] [cursor=pointer]:
+      - /url: /1
+    - link ">" [ref=e167] [cursor=pointer]:
+      - /url: /3
+  - contentinfo [ref=e168]:
+    - generic [ref=e169]:
+      - generic [ref=e170]: Copyright 2026 烧饼博客
+      - generic [ref=e172]: 关注我们
+      - generic [ref=e173]:
+        - link "X" [ref=e174] [cursor=pointer]:
+          - /url: https://twitter.com/
+          - img [ref=e175]
+        - link "Mastodon" [ref=e177] [cursor=pointer]:
+          - /url: https://mastodon.social/
+          - img [ref=e178]
+        - link "Bluesky" [ref=e180] [cursor=pointer]:
+          - /url: https://bsky.app/
+          - img [ref=e181]

@@ -1,0 +1,332 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "烧饼博客" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e5]:
+        - navigation [ref=e6]:
+          - link "首页" [ref=e7] [cursor=pointer]:
+            - /url: /
+          - link "标签" [ref=e8] [cursor=pointer]:
+            - /url: /tags/
+          - link "归档" [ref=e9] [cursor=pointer]:
+            - /url: /archives/
+          - link "友链" [ref=e10] [cursor=pointer]:
+            - /url: /links/
+          - link "关于" [ref=e11] [cursor=pointer]:
+            - /url: /about/
+          - link "联系" [ref=e12] [cursor=pointer]:
+            - /url: /contact/
+          - link "捐赠" [ref=e13] [cursor=pointer]:
+            - /url: https://nm.sl/
+          - link "免责声明" [ref=e14] [cursor=pointer]:
+            - /url: /disclaimer/
+        - link "RSS Feed" [ref=e15] [cursor=pointer]:
+          - /url: /atom.xml
+          - img [ref=e16]
+        - button "Search" [ref=e18] [cursor=pointer]:
+          - img [ref=e19]
+  - main [ref=e22]:
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - link "Debian / Ubuntu 下使用 nginx-acme 自动签发并配置 SSL 证书" [ref=e25] [cursor=pointer]:
+          - /url: /debian-nginx-acme/
+          - img "Debian / Ubuntu 下使用 nginx-acme 自动签发并配置 SSL 证书" [ref=e26]
+        - generic [ref=e27]:
+          - link "Debian / Ubuntu 下使用 nginx-acme 自动签发并配置 SSL 证书" [ref=e28] [cursor=pointer]:
+            - /url: /debian-nginx-acme/
+            - heading "Debian / Ubuntu 下使用 nginx-acme 自动签发并配置 SSL 证书" [level=2] [ref=e29]
+          - link "Debian / Ubuntu 下使用 nginx-acme 自动签发并配置 SSL 证书" [ref=e30] [cursor=pointer]:
+            - /url: /debian-nginx-acme/
+            - paragraph [ref=e31]: 本文将介绍在 Debian 或 Ubuntu 下使用 nginx-acme 自动签发并配置 SSL 证书的方法。
+          - generic [ref=e32]:
+            - link "标签 Nginx" [ref=e33] [cursor=pointer]:
+              - /url: /tags/nginx/
+              - generic [ref=e34]: "#nginx"
+            - link "标签 SSL" [ref=e35] [cursor=pointer]:
+              - /url: /tags/ssl/
+              - generic [ref=e36]: "#ssl"
+          - generic [ref=e37]:
+            - time [ref=e38]: May 20th, 2026
+            - link "阅读 Debian / Ubuntu 下使用 nginx-acme 自动签发并配置 SSL 证书" [ref=e39] [cursor=pointer]:
+              - /url: /debian-nginx-acme/
+              - text: 阅读 →
+      - generic [ref=e40]:
+        - link "Ubuntu 24.04 Noble 升级 Ubuntu 26.04 Resolute" [ref=e41] [cursor=pointer]:
+          - /url: /ubuntu-upgrade-2604/
+          - img "Ubuntu 24.04 Noble 升级 Ubuntu 26.04 Resolute" [ref=e42]
+        - generic [ref=e43]:
+          - link "Ubuntu 24.04 Noble 升级 Ubuntu 26.04 Resolute" [ref=e44] [cursor=pointer]:
+            - /url: /ubuntu-upgrade-2604/
+            - heading "Ubuntu 24.04 Noble 升级 Ubuntu 26.04 Resolute" [level=2] [ref=e45]
+          - link "Ubuntu 24.04 Noble 升级 Ubuntu 26.04 Resolute" [ref=e46] [cursor=pointer]:
+            - /url: /ubuntu-upgrade-2604/
+            - paragraph [ref=e47]: 本文将指导如何升级 Ubuntu 24.04 Noble Numbat 到 Ubuntu 26.04 Resolute Raccoon。
+          - link "标签 Ubuntu" [ref=e49] [cursor=pointer]:
+            - /url: /tags/ubuntu/
+            - generic [ref=e50]: "#ubuntu"
+          - generic [ref=e51]:
+            - time [ref=e52]: May 19th, 2026
+            - link "阅读 Ubuntu 24.04 Noble 升级 Ubuntu 26.04 Resolute" [ref=e53] [cursor=pointer]:
+              - /url: /ubuntu-upgrade-2604/
+              - text: 阅读 →
+      - generic [ref=e54]:
+        - link "WSL 2 使用 Docker 桥接模式网络访问 HTTPS 超时的解决方法" [ref=e55] [cursor=pointer]:
+          - /url: /fix-wsl-2-docker-network/
+          - img "WSL 2 使用 Docker 桥接模式网络访问 HTTPS 超时的解决方法" [ref=e56]
+        - generic [ref=e57]:
+          - link "WSL 2 使用 Docker 桥接模式网络访问 HTTPS 超时的解决方法" [ref=e58] [cursor=pointer]:
+            - /url: /fix-wsl-2-docker-network/
+            - heading "WSL 2 使用 Docker 桥接模式网络访问 HTTPS 超时的解决方法" [level=2] [ref=e59]
+          - link "WSL 2 使用 Docker 桥接模式网络访问 HTTPS 超时的解决方法" [ref=e60] [cursor=pointer]:
+            - /url: /fix-wsl-2-docker-network/
+            - paragraph [ref=e61]: 本文介绍在 WSL 2 中使用 Docker 的桥接模式（bridge network）访问 HTTPS 时出现超时问题的解决方法。
+          - generic [ref=e62]:
+            - link "标签 WSL 2" [ref=e63] [cursor=pointer]:
+              - /url: /tags/wsl-2/
+              - generic [ref=e64]: "#wsl 2"
+            - link "标签 Docker" [ref=e65] [cursor=pointer]:
+              - /url: /tags/docker/
+              - generic [ref=e66]: "#docker"
+          - generic [ref=e67]:
+            - time [ref=e68]: Jan 21st, 2026
+            - link "阅读 WSL 2 使用 Docker 桥接模式网络访问 HTTPS 超时的解决方法" [ref=e69] [cursor=pointer]:
+              - /url: /fix-wsl-2-docker-network/
+              - text: 阅读 →
+      - generic [ref=e70]:
+        - link "Debian / Ubuntu 使用源安装 LAMP 教程" [ref=e71] [cursor=pointer]:
+          - /url: /debian-install-apache-php-mysql/
+          - img "Debian / Ubuntu 使用源安装 LAMP 教程" [ref=e72]
+        - generic [ref=e73]:
+          - link "Debian / Ubuntu 使用源安装 LAMP 教程" [ref=e74] [cursor=pointer]:
+            - /url: /debian-install-apache-php-mysql/
+            - heading "Debian / Ubuntu 使用源安装 LAMP 教程" [level=2] [ref=e75]
+          - link "Debian / Ubuntu 使用源安装 LAMP 教程" [ref=e76] [cursor=pointer]:
+            - /url: /debian-install-apache-php-mysql/
+            - paragraph [ref=e77]: 本文将介绍使用官方源和第三方源在 Debian 和 Ubuntu 安装最新版 Apache 2 + PHP + MySQL 的教程，并且可以自行选择 PHP 版本。
+          - generic [ref=e78]:
+            - link "标签 Debian" [ref=e79] [cursor=pointer]:
+              - /url: /tags/debian/
+              - generic [ref=e80]: "#debian"
+            - link "标签 Ubuntu" [ref=e81] [cursor=pointer]:
+              - /url: /tags/ubuntu/
+              - generic [ref=e82]: "#ubuntu"
+          - generic [ref=e83]:
+            - time [ref=e84]: Jan 18th, 2026
+            - link "阅读 Debian / Ubuntu 使用源安装 LAMP 教程" [ref=e85] [cursor=pointer]:
+              - /url: /debian-install-apache-php-mysql/
+              - text: 阅读 →
+      - generic [ref=e86]:
+        - link "Debian / Ubuntu 使用源安装 LEMP 教程" [ref=e87] [cursor=pointer]:
+          - /url: /debian-install-nginx-php-mysql/
+          - img "Debian / Ubuntu 使用源安装 LEMP 教程" [ref=e88]
+        - generic [ref=e89]:
+          - link "Debian / Ubuntu 使用源安装 LEMP 教程" [ref=e90] [cursor=pointer]:
+            - /url: /debian-install-nginx-php-mysql/
+            - heading "Debian / Ubuntu 使用源安装 LEMP 教程" [level=2] [ref=e91]
+          - link "Debian / Ubuntu 使用源安装 LEMP 教程" [ref=e92] [cursor=pointer]:
+            - /url: /debian-install-nginx-php-mysql/
+            - paragraph [ref=e93]: 本文将介绍使用官方源和第三方源在 Debian 和 Ubuntu 安装最新版 Nginx + PHP + MySQL 的教程，并且可以自行选择 PHP 版本。
+          - generic [ref=e94]:
+            - link "标签 Debian" [ref=e95] [cursor=pointer]:
+              - /url: /tags/debian/
+              - generic [ref=e96]: "#debian"
+            - link "标签 Ubuntu" [ref=e97] [cursor=pointer]:
+              - /url: /tags/ubuntu/
+              - generic [ref=e98]: "#ubuntu"
+          - generic [ref=e99]:
+            - time [ref=e100]: Jan 18th, 2026
+            - link "阅读 Debian / Ubuntu 使用源安装 LEMP 教程" [ref=e101] [cursor=pointer]:
+              - /url: /debian-install-nginx-php-mysql/
+              - text: 阅读 →
+      - generic [ref=e102]:
+        - link "Docker 安装 Shlink 自建短网址" [ref=e103] [cursor=pointer]:
+          - /url: /docker-shlink/
+          - img "Docker 安装 Shlink 自建短网址" [ref=e104]
+        - generic [ref=e105]:
+          - link "Docker 安装 Shlink 自建短网址" [ref=e106] [cursor=pointer]:
+            - /url: /docker-shlink/
+            - heading "Docker 安装 Shlink 自建短网址" [level=2] [ref=e107]
+          - link "Docker 安装 Shlink 自建短网址" [ref=e108] [cursor=pointer]:
+            - /url: /docker-shlink/
+            - paragraph [ref=e109]: 本文将指导使用 Docker 安装 Shlink 搭建自建短网址服务。
+          - generic [ref=e110]:
+            - link "标签 Debian" [ref=e111] [cursor=pointer]:
+              - /url: /tags/debian/
+              - generic [ref=e112]: "#debian"
+            - link "标签 Ubuntu" [ref=e113] [cursor=pointer]:
+              - /url: /tags/ubuntu/
+              - generic [ref=e114]: "#ubuntu"
+          - generic [ref=e115]:
+            - time [ref=e116]: Jan 18th, 2026
+            - link "阅读 Docker 安装 Shlink 自建短网址" [ref=e117] [cursor=pointer]:
+              - /url: /docker-shlink/
+              - text: 阅读 →
+      - generic [ref=e118]:
+        - link "使用 acme.sh 配置 Let's Encrypt 签发的 IP 地址 SSL 证书" [ref=e119] [cursor=pointer]:
+          - /url: /acme-sh-ip-ssl/
+          - img "使用 acme.sh 配置 Let's Encrypt 签发的 IP 地址 SSL 证书" [ref=e120]
+        - generic [ref=e121]:
+          - link "使用 acme.sh 配置 Let's Encrypt 签发的 IP 地址 SSL 证书" [ref=e122] [cursor=pointer]:
+            - /url: /acme-sh-ip-ssl/
+            - heading "使用 acme.sh 配置 Let's Encrypt 签发的 IP 地址 SSL 证书" [level=2] [ref=e123]
+          - link "使用 acme.sh 配置 Let's Encrypt 签发的 IP 地址 SSL 证书" [ref=e124] [cursor=pointer]:
+            - /url: /acme-sh-ip-ssl/
+            - paragraph [ref=e125]: 本文将介绍使用 acme.sh 配置 Let's Encrypt 为 IP 地址签发 SSL 证书。
+          - generic [ref=e126]:
+            - link "标签 Nginx" [ref=e127] [cursor=pointer]:
+              - /url: /tags/nginx/
+              - generic [ref=e128]: "#nginx"
+            - link "标签 SSL" [ref=e129] [cursor=pointer]:
+              - /url: /tags/ssl/
+              - generic [ref=e130]: "#ssl"
+          - generic [ref=e131]:
+            - time [ref=e132]: Dec 17th, 2025
+            - link "阅读 使用 acme.sh 配置 Let's Encrypt 签发的 IP 地址 SSL 证书" [ref=e133] [cursor=pointer]:
+              - /url: /acme-sh-ip-ssl/
+              - text: 阅读 →
+      - generic [ref=e134]:
+        - link "Debian 双栈网络时开启 IPv4 优先" [ref=e135] [cursor=pointer]:
+          - /url: /debian-prefer-ipv4/
+          - img "Debian 双栈网络时开启 IPv4 优先" [ref=e136]
+        - generic [ref=e137]:
+          - link "Debian 双栈网络时开启 IPv4 优先" [ref=e138] [cursor=pointer]:
+            - /url: /debian-prefer-ipv4/
+            - heading "Debian 双栈网络时开启 IPv4 优先" [level=2] [ref=e139]
+          - link "Debian 双栈网络时开启 IPv4 优先" [ref=e140] [cursor=pointer]:
+            - /url: /debian-prefer-ipv4/
+            - paragraph [ref=e141]: 本文原理适用于大多数 Linux 系统，其他系统尚未测试，请读者自行验证。
+          - link "标签 Debian" [ref=e143] [cursor=pointer]:
+            - /url: /tags/debian/
+            - generic [ref=e144]: "#debian"
+          - generic [ref=e145]:
+            - time [ref=e146]: Nov 4th, 2025
+            - link "阅读 Debian 双栈网络时开启 IPv4 优先" [ref=e147] [cursor=pointer]:
+              - /url: /debian-prefer-ipv4/
+              - text: 阅读 →
+      - generic [ref=e148]:
+        - link "RDAP.SS - 基于 RDAP 协议的 Whois 查询网站" [ref=e149] [cursor=pointer]:
+          - /url: /rdap-ss/
+          - img "RDAP.SS - 基于 RDAP 协议的 Whois 查询网站" [ref=e150]
+        - generic [ref=e151]:
+          - link "RDAP.SS - 基于 RDAP 协议的 Whois 查询网站" [ref=e152] [cursor=pointer]:
+            - /url: /rdap-ss/
+            - heading "RDAP.SS - 基于 RDAP 协议的 Whois 查询网站" [level=2] [ref=e153]
+          - link "RDAP.SS - 基于 RDAP 协议的 Whois 查询网站" [ref=e154] [cursor=pointer]:
+            - /url: /rdap-ss/
+            - paragraph [ref=e155]: RDAP.SS 是一个基于 RDAP 协议的 Whois 查询网站，本文介绍 RDAP 协议以及如何使用。
+          - generic [ref=e156]:
+            - link "标签 RDAP" [ref=e157] [cursor=pointer]:
+              - /url: /tags/rdap/
+              - generic [ref=e158]: "#rdap"
+            - link "标签 Whois" [ref=e159] [cursor=pointer]:
+              - /url: /tags/whois/
+              - generic [ref=e160]: "#whois"
+          - generic [ref=e161]:
+            - time [ref=e162]: Nov 3rd, 2025
+            - link "阅读 RDAP.SS - 基于 RDAP 协议的 Whois 查询网站" [ref=e163] [cursor=pointer]:
+              - /url: /rdap-ss/
+              - text: 阅读 →
+      - generic [ref=e164]:
+        - link "Debian 使用 extrepo 配置第三方软件源" [ref=e165] [cursor=pointer]:
+          - /url: /debian-extrepo/
+          - img "Debian 使用 extrepo 配置第三方软件源" [ref=e166]
+        - generic [ref=e167]:
+          - link "Debian 使用 extrepo 配置第三方软件源" [ref=e168] [cursor=pointer]:
+            - /url: /debian-extrepo/
+            - heading "Debian 使用 extrepo 配置第三方软件源" [level=2] [ref=e169]
+          - link "Debian 使用 extrepo 配置第三方软件源" [ref=e170] [cursor=pointer]:
+            - /url: /debian-extrepo/
+            - paragraph [ref=e171]: 本文将指导如何在 Debian 下使用 extrepo 配置第三方软件源。
+          - generic [ref=e172]:
+            - link "标签 Debian" [ref=e173] [cursor=pointer]:
+              - /url: /tags/debian/
+              - generic [ref=e174]: "#debian"
+            - link "标签 extrepo" [ref=e175] [cursor=pointer]:
+              - /url: /tags/extrepo/
+              - generic [ref=e176]: "#extrepo"
+          - generic [ref=e177]:
+            - time [ref=e178]: Oct 20th, 2025
+            - link "阅读 Debian 使用 extrepo 配置第三方软件源" [ref=e179] [cursor=pointer]:
+              - /url: /debian-extrepo/
+              - text: 阅读 →
+      - generic [ref=e180]:
+        - link "Debian 安装 Nextcloud 服务端" [ref=e181] [cursor=pointer]:
+          - /url: /debian-nextcloud/
+          - img "Debian 安装 Nextcloud 服务端" [ref=e182]
+        - generic [ref=e183]:
+          - link "Debian 安装 Nextcloud 服务端" [ref=e184] [cursor=pointer]:
+            - /url: /debian-nextcloud/
+            - heading "Debian 安装 Nextcloud 服务端" [level=2] [ref=e185]
+          - link "Debian 安装 Nextcloud 服务端" [ref=e186] [cursor=pointer]:
+            - /url: /debian-nextcloud/
+            - paragraph [ref=e187]: 本文将指导如何在 Debian 下安装并配置 Nextcloud 服务端。
+          - generic [ref=e188]:
+            - link "标签 Debian" [ref=e189] [cursor=pointer]:
+              - /url: /tags/debian/
+              - generic [ref=e190]: "#debian"
+            - link "标签 Nextcloud" [ref=e191] [cursor=pointer]:
+              - /url: /tags/nextcloud/
+              - generic [ref=e192]: "#nextcloud"
+          - generic [ref=e193]:
+            - time [ref=e194]: Oct 20th, 2025
+            - link "阅读 Debian 安装 Nextcloud 服务端" [ref=e195] [cursor=pointer]:
+              - /url: /debian-nextcloud/
+              - text: 阅读 →
+      - generic [ref=e196]:
+        - link "升级 Debian 后 GitLab PostgreSQL 无法启动的解决方法" [ref=e197] [cursor=pointer]:
+          - /url: /fix-gitlab-postgresql-not-starting-debian-upgrade/
+          - img "升级 Debian 后 GitLab PostgreSQL 无法启动的解决方法" [ref=e198]
+        - generic [ref=e199]:
+          - link "升级 Debian 后 GitLab PostgreSQL 无法启动的解决方法" [ref=e200] [cursor=pointer]:
+            - /url: /fix-gitlab-postgresql-not-starting-debian-upgrade/
+            - heading "升级 Debian 后 GitLab PostgreSQL 无法启动的解决方法" [level=2] [ref=e201]
+          - link "升级 Debian 后 GitLab PostgreSQL 无法启动的解决方法" [ref=e202] [cursor=pointer]:
+            - /url: /fix-gitlab-postgresql-not-starting-debian-upgrade/
+            - paragraph [ref=e203]: 本文将介绍在升级 Debian 系统后，GitLab 的 PostgreSQL 数据库无法正常启动的问题。
+          - generic [ref=e204]:
+            - link "标签 Debian" [ref=e205] [cursor=pointer]:
+              - /url: /tags/debian/
+              - generic [ref=e206]: "#debian"
+            - link "标签 GitLab" [ref=e207] [cursor=pointer]:
+              - /url: /tags/gitlab/
+              - generic [ref=e208]: "#gitlab"
+          - generic [ref=e209]:
+            - time [ref=e210]: Sep 16th, 2025
+            - link "阅读 升级 Debian 后 GitLab PostgreSQL 无法启动的解决方法" [ref=e211] [cursor=pointer]:
+              - /url: /fix-gitlab-postgresql-not-starting-debian-upgrade/
+              - text: 阅读 →
+    - navigation "Pagination" [ref=e214]:
+      - link "Page Link" [ref=e215] [cursor=pointer]:
+        - /url: /
+        - text: "1"
+      - link "Page Link" [ref=e216] [cursor=pointer]:
+        - /url: /page/2/
+        - text: "2"
+      - link "Page Link" [ref=e217] [cursor=pointer]:
+        - /url: /page/3/
+        - text: "3"
+      - link "Page Link" [ref=e218] [cursor=pointer]:
+        - /url: /page/4/
+        - text: "4"
+      - link "Next Page" [ref=e219] [cursor=pointer]:
+        - /url: /page/2/
+        - img [ref=e220]
+  - button "Back to Top" [ref=e223] [cursor=pointer]:
+    - img [ref=e224]
+  - contentinfo [ref=e226]:
+    - generic [ref=e229]:
+      - text: Copyright © 2026 烧饼博客
+      - generic [ref=e230]: ·
+      - generic [ref=e231]: 关注我们
+      - generic [ref=e232]:
+        - link "Visit Showfom's profile on X" [ref=e233] [cursor=pointer]:
+          - /url: https://x.com/showfom
+          - img [ref=e234]
+        - link "Visit Showfom's profile on Mastodon" [ref=e236] [cursor=pointer]:
+          - /url: https://acg.mn/@Showfom
+          - img [ref=e237]
+        - link "Visit Showfom's profile on Bluesky" [ref=e239] [cursor=pointer]:
+          - /url: https://bsky.app/profile/u.sb
+          - img [ref=e240]
+  - alert [ref=e242]

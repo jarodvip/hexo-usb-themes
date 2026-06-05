@@ -1,0 +1,164 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e6]:
+        - heading "Hexo" [level=1] [ref=e8]:
+          - link "Hexo" [ref=e9] [cursor=pointer]:
+            - /url: /
+        - generic [ref=e10]:
+          - navigation [ref=e11]:
+            - text: 
+            - link "Home" [ref=e12] [cursor=pointer]:
+              - /url: /
+            - link "Archives" [ref=e13] [cursor=pointer]:
+              - /url: /archives
+          - navigation [ref=e14]:
+            - link "" [ref=e15] [cursor=pointer]:
+              - /url: /atom.xml
+              - generic [ref=e16]: 
+            - generic "Search" [ref=e17] [cursor=pointer]:
+              - generic [ref=e18]: 
+          - generic [ref=e20]:
+            - searchbox "Search" [ref=e21]
+            - button "" [ref=e22] [cursor=pointer]
+    - generic [ref=e23]:
+      - article [ref=e25]:
+        - link "2026-06-04" [ref=e27] [cursor=pointer]:
+          - /url: /2026/06/04/hello-world/
+          - time [ref=e28]: 2026-06-04
+        - generic [ref=e29]:
+          - heading "Hello World" [level=1] [ref=e31]:
+            - link "Hello World" [ref=e32] [cursor=pointer]:
+              - /url: /2026/06/04/hello-world/
+          - generic [ref=e33]:
+            - paragraph [ref=e34]:
+              - text: Welcome to
+              - link "Hexo" [ref=e35] [cursor=pointer]:
+                - /url: https://hexo.io/
+              - text: "! This is your very first post. Check"
+              - link "documentation" [ref=e36] [cursor=pointer]:
+                - /url: https://hexo.io/docs/
+              - text: for more info. If you get any problems when using Hexo, you can find the answer in
+              - link "troubleshooting" [ref=e37] [cursor=pointer]:
+                - /url: https://hexo.io/docs/troubleshooting.html
+              - text: or you can ask me on
+              - link "GitHub" [ref=e38] [cursor=pointer]:
+                - /url: https://github.com/hexojs/hexo/issues
+              - text: .
+            - heading "Quick StartQuick Start" [level=2] [ref=e39]:
+              - link "Quick Start":
+                - /url: "#Quick-Start"
+              - text: Quick Start
+            - heading "Create a new postCreate a new post" [level=3] [ref=e40]:
+              - link "Create a new post":
+                - /url: "#Create-a-new-post"
+              - text: Create a new post
+            - figure [ref=e41]:
+              - table [ref=e42]:
+                - rowgroup [ref=e43]:
+                  - row "1 $ hexo new \"My New Post\"" [ref=e44]:
+                    - cell "1" [ref=e45]:
+                      - generic [ref=e46]: "1"
+                    - cell "$ hexo new \"My New Post\"" [ref=e47]:
+                      - generic [ref=e49]: $ hexo new "My New Post"
+            - paragraph [ref=e50]:
+              - text: "More info:"
+              - link "Writing" [ref=e51] [cursor=pointer]:
+                - /url: https://hexo.io/docs/writing.html
+            - heading "Run serverRun server" [level=3] [ref=e52]:
+              - link "Run server":
+                - /url: "#Run-server"
+              - text: Run server
+            - figure [ref=e53]:
+              - table [ref=e54]:
+                - rowgroup [ref=e55]:
+                  - row "1 $ hexo server" [ref=e56]:
+                    - cell "1" [ref=e57]:
+                      - generic [ref=e58]: "1"
+                    - cell "$ hexo server" [ref=e59]:
+                      - generic [ref=e60]: $ hexo server
+            - paragraph [ref=e61]:
+              - text: "More info:"
+              - link "Server" [ref=e62] [cursor=pointer]:
+                - /url: https://hexo.io/docs/server.html
+            - heading "Generate static filesGenerate static files" [level=3] [ref=e63]:
+              - link "Generate static files":
+                - /url: "#Generate-static-files"
+              - text: Generate static files
+            - figure [ref=e64]:
+              - table [ref=e65]:
+                - rowgroup [ref=e66]:
+                  - row "1 $ hexo generate" [ref=e67]:
+                    - cell "1" [ref=e68]:
+                      - generic [ref=e69]: "1"
+                    - cell "$ hexo generate" [ref=e70]:
+                      - generic [ref=e71]: $ hexo generate
+            - paragraph [ref=e72]:
+              - text: "More info:"
+              - link "Generating" [ref=e73] [cursor=pointer]:
+                - /url: https://hexo.io/docs/generating.html
+            - heading "Deploy to remote sitesDeploy to remote sites" [level=3] [ref=e74]:
+              - link "Deploy to remote sites":
+                - /url: "#Deploy-to-remote-sites"
+              - text: Deploy to remote sites
+            - figure [ref=e75]:
+              - table [ref=e76]:
+                - rowgroup [ref=e77]:
+                  - row "1 $ hexo deploy" [ref=e78]:
+                    - cell "1" [ref=e79]:
+                      - generic [ref=e80]: "1"
+                    - cell "$ hexo deploy" [ref=e81]:
+                      - generic [ref=e82]: $ hexo deploy
+            - paragraph [ref=e83]:
+              - text: "More info:"
+              - link "Deployment" [ref=e84] [cursor=pointer]:
+                - /url: https://hexo.io/docs/one-command-deployment.html
+          - generic [ref=e85]:
+            - generic [ref=e87] [cursor=pointer]: Share
+            - list:
+              - listitem [ref=e88]:
+                - link "#Hexo" [ref=e89] [cursor=pointer]:
+                  - /url: /tags/Hexo/
+              - listitem [ref=e90]:
+                - link "#入门" [ref=e91] [cursor=pointer]:
+                  - /url: /tags/%E5%85%A5%E9%97%A8/
+      - complementary [ref=e92]:
+        - generic [ref=e93]:
+          - heading "Tags" [level=3] [ref=e94]
+          - list [ref=e96]:
+            - listitem [ref=e97]:
+              - link "Hexo" [ref=e98] [cursor=pointer]:
+                - /url: /tags/Hexo/
+            - listitem [ref=e99]:
+              - link "入门" [ref=e100] [cursor=pointer]:
+                - /url: /tags/%E5%85%A5%E9%97%A8/
+        - generic [ref=e101]:
+          - heading "Tag Cloud" [level=3] [ref=e102]
+          - generic [ref=e103]:
+            - link "Hexo" [ref=e104] [cursor=pointer]:
+              - /url: /tags/Hexo/
+            - link "入门" [ref=e105] [cursor=pointer]:
+              - /url: /tags/%E5%85%A5%E9%97%A8/
+        - generic [ref=e106]:
+          - heading "Archives" [level=3] [ref=e107]
+          - list [ref=e109]:
+            - listitem [ref=e110]:
+              - link "June 2026" [ref=e111] [cursor=pointer]:
+                - /url: /archives/2026/06/
+        - generic [ref=e112]:
+          - heading "Recent Posts" [level=3] [ref=e113]
+          - list [ref=e115]:
+            - listitem [ref=e116]:
+              - link "Hello World" [ref=e117] [cursor=pointer]:
+                - /url: /2026/06/04/hello-world/
+    - contentinfo [ref=e118]:
+      - generic [ref=e120]:
+        - text: © 2026 John Doe
+        - text: Powered by
+        - link "Hexo" [ref=e121] [cursor=pointer]:
+          - /url: https://hexo.io/
+  - navigation [ref=e122]:
+    - link "Home" [ref=e123] [cursor=pointer]:
+      - /url: /
+    - link "Archives" [ref=e124] [cursor=pointer]:
+      - /url: /archives

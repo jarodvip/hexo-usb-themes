@@ -1,0 +1,26 @@
+<footer class="footer">
+  <div class="footer-inner">
+    <span><span class="copyright-text">Copyright <%= new Date().getFullYear() %> 烧饼博客</span></span>
+    <span class="footer-dot"></span>
+    <span class="follow-text">关注我们</span>
+    <div class="social-links">
+      <%
+        var socialIcons = {
+          'x': { name: 'X', path: 'M4 4l11.733 16h4.267l-11.733 -16zM4 20l6.768 -6.768m2.46 2.46L20 4' },
+          'mastodon': { name: 'Mastodon', path: 'M21.317 4.687c-2.507 0-4.5 1.75-4.5 1.75s-.283.183-.667.183c-.383 0-.667-.183-.667-.183s-1.992-1.75-4.5-1.75-4.5 1.75-4.5 1.75c-.383 0-.667.183-.667.183S4.183 4.687 1.683 4.687C.75 4.687 0 5.437 0 6.375v2.5c0 .938.75 1.687 1.683 1.687.383 0 .667-.183.667-.183s1.992-1.75 4.5-1.75 4.5 1.75 4.5 1.75c.383 0 .667.183.667.183s2.008.183 4.5.183c2.5 0 4.5-.183 4.5-.183s2.008-1.75 4.5-1.75c.383 0 .667.183.667.183s.383.183.667.183c.983 0 1.683-.75 1.683-1.687v-2.5c0-.938-.75-1.688-1.683-1.688z' },
+          'bluesky': { name: 'Bluesky', path: 'M20 10c0 5.523-4.026 10-9 10s-9-4.477-9-10a9 9 0 0 1 18 0z' },
+          'github': { name: 'GitHub', path: 'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22' }
+        };
+        var socials = theme.social || [];
+        for (var i = 0; i < socials.length; i++) {
+          var s = socials[i];
+          var iconKey = s.icon || 'x';
+          var iconData = socialIcons[iconKey] || socialIcons['x'];
+      %>
+        <a href="<%- s.url %>" target="_blank" rel="noopener" class="social-link" title="<%- s.name %>">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="<%- iconData.path %>"/></svg>
+        </a>
+      <% } %>
+    </div>
+  </div>
+</footer>

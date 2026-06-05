@@ -1,0 +1,70 @@
+<div class="posts-layout">
+  <% page.posts.each(function(post) { %>
+  <article class="post-card">
+    <a href="<%- url_for(post.path) %>" class="post-card-cover">
+      <% if (post.cover) { %>
+        <img src="<%- url_for(post.cover) %>" alt="<%- post.title %>">
+      <% } else { %>
+        <img src="<%- url_for('images/default-cover.jpg') %>" alt="<%- post.title %>" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 500%22><rect fill=%22%23262626%22 width=%22800%22 height=%22500%22/><text fill=%22%23a0a0a0%22 font-family=%22sans-serif%22 font-size=%2224%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+      <% } %>
+    </a>
+    <div class="post-card-body">
+      <h2 class="post-card-title"><%- post.title %></h2>
+      <p class="post-card-excerpt">
+        <%
+          var excerpt = '';
+          if (post.excerpt && post.excerpt.trim()) {
+            // Extract first paragraph: between first <p> and </p>
+            var pMatch = post.excerpt.match(/<p[^>]*>(.*?)<\/p>/i);
+            if (pMatch) {
+              excerpt = pMatch[1].replace(/<[^>]+>/g, '').trim();
+            }
+          } else if (post.content && post.content.trim()) {
+            var pMatch = post.content.match(/<p[^>]*>(.*?)<\/p>/i);
+            if (pMatch) {
+              excerpt = pMatch[1].replace(/<[^>]+>/g, '').trim();
+            }
+          }
+          if (!excerpt) excerpt = '暂无摘要…';
+        %>
+        <%- excerpt %>
+      </p>
+      <% if (theme.show_tags && post.tags && post.tags.length > 0) { %>
+      <div class="post-card-tags">
+        <% post.tags.each(function(tag, i) { %>
+          <% if (i < 5) { %>
+          <a href="<%- url_for(tag.path) %>" class="tag-link">
+            <span><%- tag.name %></span>
+          </a>
+          <% } %>
+        <% }); %>
+      </div>
+      <% } %>
+      <div class="post-card-footer">
+        <time class="post-card-date"><%- post.date.format('YYYY-MM-DD') %></time>
+        <% if (theme.show_read_more) { %>
+        <a href="<%- url_for(post.path) %>" class="post-card-read-more">
+          阅读
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <% } %>
+      </div>
+    </div>
+  </article>
+  <% }); %>
+</div>
+
+<!-- Pagination -->
+<% if (page.total > 1) { %>
+<nav class="pagination">
+  <% for (var i = 1; i <= page.total; i++) { %>
+    <% if (i === page.current) { %>
+      <a class="page-number current"><%= i %></a>
+    <% } else { %>
+      <a href="<%- i === 1 ? url_for() : url_for('page/' + i + '/') %>" class="page-number"><%= i %></a>
+    <% } %>
+  <% } %>
+  <% if (page.prev) { %><a href="<%- url_for(page.prev) %>" class="prev">&lt;</a><% } %>
+  <% if (page.next) { %><a href="<%- url_for(page.next) %>" class="next">&gt;</a><% } %>
+</nav>
+<% } %>

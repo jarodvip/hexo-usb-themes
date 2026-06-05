@@ -1,0 +1,50 @@
+<div class="archive-layout">
+  <h1 class="page-title">归档</h1>
+  <%
+    var posts = page.posts;
+    var lastYear = null;
+    var lastMonth = null;
+  %>
+  <% if (posts && posts.length > 0) { %>
+  <% posts.each(function(post) {
+    var year = post.date.year();
+    var month = post.date.month();
+  %>
+    <% if (year !== lastYear) {
+      if (lastYear !== null) { %></ul></div><% } %>
+      <div class="archive-year">
+        <h2 class="archive-year-title"><%= year %> 年</h2>
+        <ul class="archive-list">
+    <% } %>
+    <% if (month !== lastMonth) {
+      if (lastMonth !== null) { %></ul><% } %>
+      <div class="archive-month">
+        <h3 class="archive-month-title"><%= month %> 月</h3>
+        <ul class="archive-list">
+    <% } %>
+        <li class="archive-item">
+          <a href="<%- url_for(post.path) %>">
+            <time><%= post.date.format('MM-DD') %></time>
+            <span><%- post.title %></span>
+          </a>
+        </li>
+    <%
+      lastYear = year;
+      lastMonth = month;
+    }); %></ul></div></div>
+  <% } %>
+</div>
+
+<% if (page.total > 1) { %>
+<nav class="pagination">
+  <% for (var i = 1; i <= page.total; i++) { %>
+    <% if (i === page.current) { %>
+      <a class="page-number current"><%= i %></a>
+    <% } else { %>
+      <a href="<%- i === 1 ? url_for('archives/') : url_for('archives/page/' + i + '/') %>" class="page-number"><%= i %></a>
+    <% } %>
+  <% } %>
+  <% if (page.prev) { %><a href="<%- url_for('archives/' + page.prev) %>" class="prev">&lt;</a><% } %>
+  <% if (page.next) { %><a href="<%- url_for('archives/' + page.next) %>" class="next">&gt;</a><% } %>
+</nav>
+<% } %>

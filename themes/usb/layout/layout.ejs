@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= page.title ? page.title + ' - 烧饼博客' : config.title %></title>
+  <meta name="description" content="<%= config.description || '' %>">
+  <meta name="keywords" content="<%= config.keywords || '' %>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <% if (theme.favicon) { %>
+  <link rel="shortcut icon" href="<%- url_for(theme.favicon) %>">
+  <% } else { %>
+  <link rel="shortcut icon" href="<%- url_for('favicon.ico') %>">
+  <% } %>
+
+  <!-- Theme CSS -->
+  <link rel="stylesheet" href="<%- url_for('css/style.css') %>">
+
+  <!-- Highlight.js (for code blocks) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-on-dark.min.css">
+</head>
+<body>
+  <!-- Header / Navbar -->
+  <%- partial('partials/header') %>
+
+  <!-- Main Content -->
+  <div class="content-wrapper">
+    <div class="container">
+      <%- body %>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <%- partial('partials/footer') %>
+
+  <!-- Back to Top Button -->
+  <%- partial('partials/back-to-top') %>
+
+  <!-- Theme JS -->
+  <script src="<%- url_for('js/main.js') %>"></script>
+
+  <!-- Highlight.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

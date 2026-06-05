@@ -1,0 +1,230 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "烧饼博客" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - navigation [ref=e5]:
+        - link "首页" [ref=e6] [cursor=pointer]:
+          - /url: /
+        - link "标签" [ref=e7] [cursor=pointer]:
+          - /url: /tags
+        - link "归档" [ref=e8] [cursor=pointer]:
+          - /url: /archives
+        - link "友链" [ref=e9] [cursor=pointer]:
+          - /url: /
+        - link "关于" [ref=e10] [cursor=pointer]:
+          - /url: /about
+        - link "联系" [ref=e11] [cursor=pointer]:
+          - /url: /contact
+        - link "捐赠" [ref=e12] [cursor=pointer]:
+          - /url: /donate
+        - link "免责声明" [ref=e13] [cursor=pointer]:
+          - /url: /disclaimer
+        - link "RSS" [ref=e14] [cursor=pointer]:
+          - /url: /atom.xml
+          - img [ref=e15]
+  - article [ref=e21]:
+    - generic [ref=e22]:
+      - heading "Debian / Ubuntu 下使用 nginx-acme 自动签发并配置 SSL 证书" [level=1] [ref=e23]
+      - time [ref=e25]: 2026-05-20
+    - generic [ref=e26]:
+      - paragraph [ref=e27]: 本文将介绍在 Debian 或 Ubuntu 下使用 nginx-acme 自动签发并配置 SSL 证书的方法。
+      - paragraph [ref=e28]: 本文适合 Debian Stable 和 Ubuntu LTS，请使用 root 用户进行操作。
+      - paragraph [ref=e29]:
+        - text: "##"
+        - link "#" [ref=e30] [cursor=pointer]:
+          - /url: "#1-shi-me-shi-nginx-acme"
+        - text: 1、什么是 nginx-acme
+      - paragraph [ref=e31]:
+        - link "nginx-acme" [ref=e32] [cursor=pointer]:
+          - /url: https://github.com/nginx/nginx-acme
+        - text: 是 Nginx 官方开发的基于 ACME 协议自动签发 SSL 证书的模块，隔壁 Caddy 都出了几百年的功能， Nginx 也终于赶上了。
+      - paragraph [ref=e33]: 和 Nginx 使用 C 语言开发不同，这个模块是用 Rust 语言开发的，这里就不做评价。
+      - paragraph [ref=e34]:
+        - text: 这个模块支持
+        - link "RFC8555" [ref=e35] [cursor=pointer]:
+          - /url: https://datatracker.ietf.org/doc/html/rfc8555
+        - text: 、
+        - link "RFC8737" [ref=e36] [cursor=pointer]:
+          - /url: https://datatracker.ietf.org/doc/html/rfc8737
+        - text: 、
+        - link "RFC8738" [ref=e37] [cursor=pointer]:
+          - /url: https://datatracker.ietf.org/doc/html/rfc8738
+        - text: 和
+        - link "draft-ietf-acme-profiles" [ref=e38] [cursor=pointer]:
+          - /url: https://datatracker.ietf.org/doc/draft-ietf-acme-profiles/
+        - text: 等规范，目前我实际测试下来已经基本可以用于生产环境。
+      - paragraph [ref=e39]:
+        - text: "##"
+        - link "#" [ref=e40] [cursor=pointer]:
+          - /url: "#2-an-zhuang-n-wtf"
+        - text: 2、安装 N.WTF
+      - paragraph [ref=e41]:
+        - text: 这里我们使用
+        - link "烧饼博客" [ref=e42] [cursor=pointer]:
+          - /url: https://u.sb/
+        - text: 打包的
+        - link "N.WTF" [ref=e43] [cursor=pointer]:
+          - /url: https://n.wtf/
+        - text: ，这个项目已经集成了
+        - code [ref=e44]: nginx-acme
+        - text: 模块，可以做到开箱即用。
+      - paragraph [ref=e45]: 首先，安装一些必要的软件包：
+      - paragraph [ref=e46]:
+        - code [ref=e47]: sudo apt update sudo apt upgrade -y sudo apt install curl vim wget gnupg dpkg apt-transport-https lsb-release ca-certificates
+        - text: Copy
+        - text: 然后加入 N.WTF 的 GPG 公钥和 apt 源：
+      - paragraph [ref=e48]:
+        - code [ref=e49]: curl -sSL https://n.wtf/public.key | sudo bash -c 'gpg --dearmor > /usr/share/keyrings/n.wtf.gpg' sudo bash -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/n.wtf.gpg] https://mirror-cdn.xtom.com/sb/nginx/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/n.wtf.list'
+        - text: Copy
+        - text: 国内机器可以用
+        - link "清华 TUNA" [ref=e50] [cursor=pointer]:
+          - /url: https://mirrors.tuna.tsinghua.edu.cn/
+        - text: 的国内源：
+      - paragraph [ref=e51]:
+        - code [ref=e52]: curl -sSL https://mirrors.tuna.tsinghua.edu.cn/n.wtf/public.key | sudo bash -c 'gpg --dearmor > /usr/share/keyrings/n.wtf.gpg' sudo bash -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/n.wtf.gpg] https://mirrors.tuna.tsinghua.edu.cn/n.wtf/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/n.wtf.list'
+        - text: Copy
+        - text: Debian 下也可以直接使用
+        - link "extrepo" [ref=e53] [cursor=pointer]:
+          - /url: /debian-extrepo/
+        - text: ":"
+      - paragraph [ref=e54]:
+        - code [ref=e55]: sudo apt update sudo apt install extrepo -y sudo extrepo enable n.wtf
+        - text: Copy
+        - text: 接着更新系统并安装 Nginx：
+      - paragraph [ref=e56]:
+        - code [ref=e57]: sudo apt update sudo apt install nginx-extras -y
+        - text: Copy
+      - paragraph [ref=e58]:
+        - text: "##"
+        - link "#" [ref=e59] [cursor=pointer]:
+          - /url: "#3-nginx-acme-zhun-bei-gong-zuo"
+        - text: 3、nginx-acme 准备工作
+      - paragraph [ref=e60]:
+        - text: 准备工作很简单，我们需要建立一个目录来存放 SSL 证书并给予正确的权限，这里我们以
+        - code [ref=e61]: /var/cache/nginx/letsencrypt
+        - text: 为演示：
+      - paragraph [ref=e62]:
+        - code [ref=e63]: sudo mkdir -p /var/cache/nginx sudo mkdir -p /var/cache/nginx/letsencrypt sudo chown 33:33 /var/cache/nginx -R
+        - text: Copy
+        - text: 然后别忘了把域名解析到你的服务器哦！
+      - paragraph [ref=e64]:
+        - text: "##"
+        - link "#" [ref=e65] [cursor=pointer]:
+          - /url: "#4-pei-zhi-nginx-zhan-dian"
+        - text: 4、配置 Nginx 站点
+      - paragraph [ref=e66]:
+        - text: 我们以
+        - code [ref=e67]: example.com
+        - text: 为例，假设你的邮箱是
+        - code [ref=e68]: "[[email protected]](/cdn-cgi/l/email-protection)"
+        - text: ，需要配置的域名是
+        - code [ref=e69]: example.com
+        - text: 和
+        - code [ref=e70]: www.example.com
+        - text: ，并且希望访问
+        - code [ref=e71]: www.example.com
+        - text: 跳转到
+        - code [ref=e72]: example.com
+        - text: ：
+      - paragraph [ref=e73]:
+        - text: 直接修改
+        - code [ref=e74]: /etc/nginx/sites-enabled/default
+        - text: 文件：
+      - paragraph [ref=e75]: "`resolver 8.8.8.8:53 ipv6=off valid=5s;"
+      - paragraph [ref=e76]:
+        - text: "acme_issuer letsencrypt {"
+        - text: uri
+        - link "https://acme-v02.api.letsencrypt.org/directory" [ref=e77] [cursor=pointer]:
+          - /url: https://acme-v02.api.letsencrypt.org/directory
+        - text: ;
+        - text: contact
+        - link "user@example.com" [ref=e78] [cursor=pointer]:
+          - /url: mailto:user@example.com
+        - text: ;
+        - text: state_path /var/cache/nginx/letsencrypt;
+        - text: accept_terms_of_service;
+        - text: ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
+        - text: ssl_verify off;
+        - text: "}"
+      - paragraph [ref=e79]: acme_shared_zone zone=ngx_acme_shared:1M;
+      - paragraph [ref=e80]:
+        - text: "server {"
+        - text: "# Listen on port 80 for all IPv4 and IPv6 addresses"
+        - text: listen 80 default_server;
+        - text: listen [::]:80 default_server;
+      - generic [ref=e81]:
+        - code [ref=e83]: "# Match all domain names server_name _; location /.well-known/ { return 404; } location / { # Redirect all other HTTP requests to HTTPS using 301 permanent redirect return 301 https://$host$request_uri; }"
+        - button "Copy" [ref=e84] [cursor=pointer]
+      - paragraph [ref=e85]: "}"
+      - paragraph [ref=e86]:
+        - text: "server {"
+        - text: "# Standard TLS listening"
+        - text: listen 443 ssl default_server;
+        - text: listen [::]:443 ssl default_server;
+      - generic [ref=e87]:
+        - code [ref=e89]: "# HTTP/2 protocol support http2 on; # HTTP/3 QUIC protocol support listen 443 quic reuseport; listen [::]:443 quic reuseport; add_header Alt-Svc 'h3=\":443\"; ma=86400' always; add_header X-Protocol $server_protocol always; server_name example.com; root /var/www/html; index index.html; # modern configuration ssl_protocols TLSv1.3; ssl_ecdh_curve X25519:prime256v1:secp384r1; ssl_prefer_server_ciphers off; acme_certificate letsencrypt; ssl_certificate $acme_certificate; ssl_certificate_key $acme_certificate_key; # do not parse the certificate on each request ssl_certificate_cache max=2;"
+        - button "Copy" [ref=e90] [cursor=pointer]
+      - paragraph [ref=e91]: "}"
+      - paragraph [ref=e92]:
+        - text: "server {"
+        - text: listen 443 ssl;
+        - text: listen [::]:443 ssl;
+      - generic [ref=e93]:
+        - code [ref=e95]: "http2 on; listen 443 quic; listen [::]:443 quic; add_header Alt-Svc 'h3=\":443\"; ma=86400' always; add_header X-Protocol $server_protocol always; server_name www.example.com; return 301 https://example.com$request_uri; ssl_protocols TLSv1.3; ssl_ecdh_curve X25519:prime256v1:secp384r1; ssl_prefer_server_ciphers off; acme_certificate letsencrypt; ssl_certificate $acme_certificate; ssl_certificate_key $acme_certificate_key; # do not parse the certificate on each request ssl_certificate_cache max=2;"
+        - button "Copy" [ref=e96] [cursor=pointer]
+      - paragraph [ref=e97]:
+        - text: "}"
+        - text: "`Copy"
+        - text: 然后验证 Nginx 配置并重新加载：
+      - paragraph [ref=e98]:
+        - code [ref=e99]: sudo nginx -t sudo nginx -s reload
+        - text: Copy
+        - text: 此时，在默认的 Nginx 日志文件
+        - code [ref=e100]: /var/log/nginx/access.log
+        - text: 中可以看到 Let’s Encrypt 验证服务器的请求记录：
+      - paragraph [ref=e101]:
+        - code [ref=e102]: 23.178.112.210 - - [15/Jan/2026:16:08:18 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" 34.212.137.78 - - [15/Jan/2026:16:08:18 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" 18.222.179.58 - - [15/Jan/2026:16:08:18 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" 16.171.19.61 - - [15/Jan/2026:16:08:18 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" 13.228.72.222 - - [15/Jan/2026:16:08:18 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" 2600:3000:2710:200::81 - - [15/Jan/2026:16:08:20 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" 2600:1f14:804:fd02:f7fd:3c68:dec7:a062 - - [15/Jan/2026:16:08:20 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" 2600:1f16:269:da00:c9ce:508c:ea69:9c2 - - [15/Jan/2026:16:08:20 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" 2a05:d016:39f:3101:8b83:62b8:2603:d15d - - [15/Jan/2026:16:08:20 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)" 2406:da18:85:1401:1f69:967a:a988:cdc8 - - [15/Jan/2026:16:08:20 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)"
+        - text: Copy
+        - text: 等待数秒后即可访问
+        - code [ref=e103]: https://example.com/
+        - text: 了。
+      - paragraph [ref=e104]:
+        - text: 如果要给 IP 地址签发证书，则需要在
+        - code [ref=e105]: "acme_issuer letsencrypt {}"
+        - text: 段里添加一行
+        - code [ref=e106]: profile shortlived;
+        - text: ，并且
+        - code [ref=e107]: server_name
+        - text: 必须写入完整的 IP 地址，不能直接用
+        - code [ref=e108]: server_name _
+        - text: 哦。
+      - paragraph [ref=e109]: 不过目前 nginx-acme 最新版本 0.3.1 签发 IP 证书还是会失败，开发版已经修复，应该需要等下一个版本才能使用。
+      - paragraph [ref=e110]:
+        - text: 目前最新版本已经支持 IP 地址证书的签发，可以在
+        - code [ref=e111]: accept_terms_of_service;
+        - text: 下方加入一条
+        - code [ref=e112]: profile shortlived;
+        - text: 并且自行修改
+        - code [ref=e113]: server_name example.com;
+        - text: 为你的 IP 地址，比如
+        - code [ref=e114]: server_name 192.0.2.2 2001:db8::2;
+        - text: 即可。
+      - paragraph [ref=e115]: 读者们在使用过程中如果遇到问题，可以在 V2EX 交流讨论：
+      - paragraph [ref=e116]:
+        - link "https://be.st/Mv7j" [ref=e117] [cursor=pointer]:
+          - /url: https://be.st/Mv7j
+  - contentinfo [ref=e118]:
+    - generic [ref=e119]:
+      - generic [ref=e120]: Copyright 2026 烧饼博客
+      - generic [ref=e122]: 关注我们
+      - generic [ref=e123]:
+        - link "X" [ref=e124] [cursor=pointer]:
+          - /url: https://twitter.com/
+          - img [ref=e125]
+        - link "Mastodon" [ref=e127] [cursor=pointer]:
+          - /url: https://mastodon.social/
+          - img [ref=e128]
+        - link "Bluesky" [ref=e130] [cursor=pointer]:
+          - /url: https://bsky.app/
+          - img [ref=e131]

@@ -1,0 +1,75 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e6]:
+        - heading "Hexo" [level=1] [ref=e8]:
+          - link "Hexo" [ref=e9] [cursor=pointer]:
+            - /url: /
+        - generic [ref=e10]:
+          - navigation [ref=e11]:
+            - text: 
+            - link "Home" [ref=e12] [cursor=pointer]:
+              - /url: /
+            - link "Archives" [ref=e13] [cursor=pointer]:
+              - /url: /archives
+          - navigation [ref=e14]:
+            - link "" [ref=e15] [cursor=pointer]:
+              - /url: /atom.xml
+              - generic [ref=e16]: 
+            - generic "Search" [ref=e17] [cursor=pointer]:
+              - generic [ref=e18]: 
+          - generic [ref=e20]:
+            - searchbox "Search" [ref=e21]
+            - button "" [ref=e22] [cursor=pointer]
+    - generic [ref=e23]:
+      - generic [ref=e25]:
+        - link "2026" [ref=e27] [cursor=pointer]:
+          - /url: /archives/2026
+        - article [ref=e29]:
+          - generic [ref=e31]:
+            - link "Jun 4" [ref=e32] [cursor=pointer]:
+              - /url: /2026/06/04/hello-world/
+              - time [ref=e33]: Jun 4
+            - heading "Hello World" [level=1] [ref=e34]:
+              - link "Hello World" [ref=e35] [cursor=pointer]:
+                - /url: /2026/06/04/hello-world/
+      - complementary [ref=e36]:
+        - generic [ref=e37]:
+          - heading "Tags" [level=3] [ref=e38]
+          - list [ref=e40]:
+            - listitem [ref=e41]:
+              - link "Hexo" [ref=e42] [cursor=pointer]:
+                - /url: /tags/Hexo/
+            - listitem [ref=e43]:
+              - link "入门" [ref=e44] [cursor=pointer]:
+                - /url: /tags/%E5%85%A5%E9%97%A8/
+        - generic [ref=e45]:
+          - heading "Tag Cloud" [level=3] [ref=e46]
+          - generic [ref=e47]:
+            - link "Hexo" [ref=e48] [cursor=pointer]:
+              - /url: /tags/Hexo/
+            - link "入门" [ref=e49] [cursor=pointer]:
+              - /url: /tags/%E5%85%A5%E9%97%A8/
+        - generic [ref=e50]:
+          - heading "Archives" [level=3] [ref=e51]
+          - list [ref=e53]:
+            - listitem [ref=e54]:
+              - link "June 2026" [ref=e55] [cursor=pointer]:
+                - /url: /archives/2026/06/
+        - generic [ref=e56]:
+          - heading "Recent Posts" [level=3] [ref=e57]
+          - list [ref=e59]:
+            - listitem [ref=e60]:
+              - link "Hello World" [ref=e61] [cursor=pointer]:
+                - /url: /2026/06/04/hello-world/
+    - contentinfo [ref=e62]:
+      - generic [ref=e64]:
+        - text: © 2026 John Doe
+        - text: Powered by
+        - link "Hexo" [ref=e65] [cursor=pointer]:
+          - /url: https://hexo.io/
+  - navigation [ref=e66]:
+    - link "Home" [ref=e67] [cursor=pointer]:
+      - /url: /
+    - link "Archives" [ref=e68] [cursor=pointer]:
+      - /url: /archives
