@@ -2,12 +2,14 @@
 title: Nginx 配置 SSL 证书
 date: 2023-08-02T00:00:00.000+00:00
 tags:
+  - nginx
+  - ssl
 cover: https://s.bh.sb/images/nginx-ssl.webp
 ---
 
 本文将介绍购买 SSL 证书并在 Nginx 配置的姿势。
 
-# 免费证书和收费证书的区别
+## 免费证书和收费证书的区别
 
 首先，免费的 SSL 证书是没有保险的，也没有 SLA 保障，适合个人项目以及短期的网站，对于长期运营的网站来说，我们并不推荐使用免费的 SSL 证书，这时候您就需要购买一个收费的 SSL 证书。
 
@@ -17,58 +19,58 @@ cover: https://s.bh.sb/images/nginx-ssl.webp
 
 对于商业网站来说，推荐购买 OV 证书，价格虽贵，但是更有保障，毕竟需要验证组织才签发证书，而普通的 DV 证书仅需要验证域名即可签发。
 
-# 生成证书签发请求 (CSR)
+## 生成证书签发请求 (CSR)
 
 您必须拥有一个证书签发请求 (Certificate Signing Request，CSR) 才能申请签发 SSL 证书。
 
 这里我们使用 OS X，Linux，UNIX 及类似系统为例，UNIX 系操作系统一般已经内置了 OpenSSL 或 GnuTLS 工具链，您需要系统中存在 openssl 的可执行文件：
 
-`apt install openssl
-`Copy
+`apt install openssl`
 
+```
 ```
 `dnf install openssl
 `
 ```
+```
 Copy
 
+```
 ```
 `pacman -S openssl
 `
 ```
+```
 Copy
 
+```
 ```
 `zypper in openssl
 `
 ```
+```
 Copy
 
-# 交互式生成 CSR
+## 交互式生成 CSR
 
 首先生成一个 CSR，这个 CSR 将会用于请求 SSL 证书，这里以 2048 位 RSA 证书为例：
 
-`openssl req -new -newkey rsa:2048 -sha256 -nodes -out example_com.csr -keyout example_com.key -subj "/C=CN/ST=Beijing/L=Beijing/O=Example Inc/OU=Network Dept/CN=example.com"
-`Copy
+`openssl req -new -newkey rsa:2048 -sha256 -nodes -out example_com.csr -keyout example_com.key -subj "/C=CN/ST=Beijing/L=Beijing/O=Example Inc/OU=Network Dept/CN=example.com"`
 
 如果您准备签发泛域名证书，则使用 `*.example.com` 作为 CN (common name)：
 
-`openssl req -new -newkey rsa:2048 -sha256 -nodes -out example_com.csr -keyout example_com.key -subj "/C=CN/ST=Beijing/L=Beijing/O=Example Inc/OU=Network Dept/CN=*.example.com"
-`Copy
+`openssl req -new -newkey rsa:2048 -sha256 -nodes -out example_com.csr -keyout example_com.key -subj "/C=CN/ST=Beijing/L=Beijing/O=Example Inc/OU=Network Dept/CN=*.example.com"`
 如果您希望生成 ECC 证书，命令看起来像这样：
 
-`openssl ecparam -out example_com.key -name prime256v1 -genkey && openssl req -new -key example_com.key -nodes -out example_com.csr -subj "/C=CN/ST=Beijing/L=Beijing/O=Example Inc/OU=Network Dept/CN=example.com"
-`Copy
+`openssl ecparam -out example_com.key -name prime256v1 -genkey && openssl req -new -key example_com.key -nodes -out example_com.csr -subj "/C=CN/ST=Beijing/L=Beijing/O=Example Inc/OU=Network Dept/CN=example.com"`
 如果您准备签发的是多域名证书，请使用下面的命令将所有的域名包含进去
 
-`openssl req -new -newkey rsa:2048 -sha256 -nodes -out example_com.csr -keyout example_com.key -subj "/C=CN/ST=Beijing/L=Beijing/O=Example Inc/OU=Network Dept/CN=example.com/subjectAltName=DNS.1=sub1.example.com,DNS.2=sub2.example.com,DNS.3=sub.another-example.com"
-`Copy
+`openssl req -new -newkey rsa:2048 -sha256 -nodes -out example_com.csr -keyout example_com.key -subj "/C=CN/ST=Beijing/L=Beijing/O=Example Inc/OU=Network Dept/CN=example.com/subjectAltName=DNS.1=sub1.example.com,DNS.2=sub2.example.com,DNS.3=sub.another-example.com"`
 如果您准备签发的是 IP 证书，则留空 CN (common name)
 
-`openssl req -new -newkey rsa:2048 -sha256 -nodes -out example_com.csr -keyout example_com.key -subj "/C=CN/ST=Beijing/L=Beijing/O=Example Inc/OU=Network Dept/CN=/subjectAltName=DNS.1=192.0.2.1,DNS.2=192.0.2.2"
-`Copy
+`openssl req -new -newkey rsa:2048 -sha256 -nodes -out example_com.csr -keyout example_com.key -subj "/C=CN/ST=Beijing/L=Beijing/O=Example Inc/OU=Network Dept/CN=/subjectAltName=DNS.1=192.0.2.1,DNS.2=192.0.2.2"`
 
-# 购买下单并获取证书文件
+## 购买下单并获取证书文件
 
 所有网站购买证书的流程都是一样的，提交 `example_com.csr` 文件内容，然后填写相关资料，付款，等待邮件通知验证，验证后开通即可。
 
@@ -88,13 +90,14 @@ Copy
 
 记得把他们丢在你服务器上，比如创建并放在 `/etc/nginx/ssl` 目录。
 
-# 配置 Nginx SSL 证书开启 HTTPS
+## 配置 Nginx SSL 证书开启 HTTPS
 
 如果您按照本站的[教程](/debian-install-nginx-php-mysql/)使用烧饼博客打包的 [Nginx](https://n.wtf/)，那么可以参考如下配置，请注意，只有默认的第一个监听端口的网站才可以在 `listen` 段使用 `default_server` 和 `reuseport`，如果需要添加更多网站，请删除这两个参数：
 
 跳转所有的 HTTP 请求：
 
-`server {
+```bash
+server {
     listen 80 default_server;
     listen [::]:80 default_server;
 
@@ -102,21 +105,22 @@ Copy
         return 301 https://$host$request_uri;
     }
 }
-`Copy
+```
 生成 dhparam 文件：
 
-`mkdir -p /etc/nginx/ssl
+```bash
+mkdir -p /etc/nginx/ssl
 openssl dhparam -dsaparam -out /etc/nginx/ssl/dhparam 2048
-`Copy
+```
 嫌弃慢的也可以直接用 Mozilla 给你生成好的：
 
-`curl https://ssl-config.mozilla.org/ffdhe2048.txt > /etc/nginx/ssl/dhparam
-`Copy
+`curl https://ssl-config.mozilla.org/ffdhe2048.txt > /etc/nginx/ssl/dhparam`
 然后监听 443 端口并开启 HTTP/2、HTTP/3、OCSP、TLS 1.2、TLS 1.3 和 HSTS Preload：
 
 我们以 `example.com` 为例，网站目录位于 `/var/www/example.com`
 
-`server {
+```bash
+server {
 	listen 443 ssl default_server;
 	listen [::]:443 ssl default_server;
     # 开启 HTTP/3
@@ -148,10 +152,11 @@ openssl dhparam -dsaparam -out /etc/nginx/ssl/dhparam 2048
     add_header X-Frame-Options SAMEORIGIN;
     add_header X-Content-Type-Options nosniff;
 }
-`Copy
+```
 然后测试 Nginx 配置并重新加载：
 
-`nginx -t
+```bash
+nginx -t
 nginx -s reload
-`Copy
+```
 最终你就可以在浏览器打开 `https://example.com/` 查看是否生效了。

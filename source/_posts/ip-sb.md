@@ -2,20 +2,21 @@
 title: IP.SB - 在线 IPv4 / IPv6 信息查询
 date: 2022-01-21T00:00:00.000+00:00
 tags:
+  - 工具
 cover: https://s.bh.sb/images/ip-sb.webp
 ---
 
 IP.SB 是一个免费的在线查询 IP 服务。
 
-# 1、IP.SB 的由来
+## 1、IP.SB 的由来
 
 [IP.SB](https://ip.sb/) 前身是 [IP.GS](https://ip.gs/)，一个专门用于查询本地出口 IP 的网站，初衷是为了让用户更方便地知道自己的本地出口 IP，使用的数据库是 [Maxmind](https://maxmind.com/) 的 GeoIP2 数据库，并且提供了一个简单的 API 接口，可以获取本地出口 IP 的地理位置信息。
 
-# 2、IP.SB 使用的 IP 数据库
+## 2、IP.SB 使用的 IP 数据库
 
 IP.SB 数据库是 MaxMind 提供的商业版，介绍和购买链接请[摸这儿](https://www.maxmind.com/en/geoip2-isp-database)
 
-# 3、IP.SB 基本功能介绍
+## 3、IP.SB 基本功能介绍
 
 ## 3.1 查看本地出口 IP 地址
 
@@ -73,7 +74,7 @@ IP 地址转换 PTR 记录 [https://ip.sb/ip2ptr/](https://ip.sb/ip2ptr/)
 
 未来也会加入更多的小工具
 
-# 4、简单 API 使用
+## 4、简单 API 使用
 
 ## 4.1 curl 方式
 
@@ -83,24 +84,19 @@ IP 地址转换 PTR 记录 [https://ip.sb/ip2ptr/](https://ip.sb/ip2ptr/)
 
 默认情况下
 
-`curl ip.sb
-`Copy
+`curl ip.sb`
 只想查询 IPv4 的时候
 
-`curl -4 ip.sb
-`Copy
+`curl -4 ip.sb`
 或
 
-`curl ipv4.ip.sb
-`Copy
+`curl ipv4.ip.sb`
 只想查询 IPv6 的时候
 
-`curl -6 ip.sb
-`Copy
+`curl -6 ip.sb`
 或
 
-`curl ipv6.ip.sb
-`Copy
+`curl ipv6.ip.sb`
 
 ## 4.2 文本方式或者 IP
 

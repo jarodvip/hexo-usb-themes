@@ -2,12 +2,14 @@
 title: Debian / Ubuntu 下使用 HTTP/3 协议的 Nginx QUIC
 date: 2023-08-02T00:00:00.000+00:00
 tags:
+  - nginx
+  - quic
 cover: https://s.bh.sb/images/debian-nginx-quic.webp
 ---
 
 本文适合 Debian Stable 和 Ubuntu LTS，请使用 root 用户进行操作。
 
-# 1、什么是 HTTP/3 和 QUIC？
+## 1、什么是 HTTP/3 和 QUIC？
 
 [HTTP/3](https://en.wikipedia.org/wiki/HTTP/3) 是一种基于 [QUIC](https://en.wikipedia.org/wiki/QUIC) (Quick UDP Internet Connections) 协议的 HTTP 协议版本，它是 HTTP/2 的后继者，旨在改进 Web 性能和安全性。
 
@@ -17,67 +19,72 @@ QUIC 是一种由 Google 开发的协议，基于 [UDP](https://en.wikipedia.org
 
 总的来说，HTTP/3 的设计目标是通过减少延迟和提高性能，为 Web 应用程序提供更快、更安全和更高效的用户体验。
 
-# 2、安装 Nginx Quic
+## 2、安装 Nginx Quic
 
 这里我们推荐[烧饼博客](https://n.wtf/)团队打包的 Nginx Quic 版本，它是基于最新的官方 1.25.0 源码打包的，支持 HTTP/3 和 QUIC 协议。
 
 ## 2.1 更新系统并安装部分必要软件
 
-`apt update
+```bash
+apt update
 apt upgrade -y
 apt dist-upgrade -y
 apt install curl vim wget gnupg dpkg apt-transport-https lsb-release ca-certificates
-`Copy
+```
 
 ## 2.2 增加 GPG Key
 
 ```
+```
 `curl -sSL https://n.wtf/public.key | gpg --dearmor > /usr/share/keyrings/n.wtf.gpg
 `
+```
 ```
 Copy
 
 ## 2.3 添加 Nginx QUIC 源
 
 ```
+```
 `echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/n.wtf.gpg] https://mirror-cdn.xtom.com/sb/nginx/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/n.wtf.list
 `
+```
 ```
 Copy
 如果你的服务器在国内，可以使用下面的源：
 
-`echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/n.wtf.gpg] https://mirror.iscas.ac.cn/sb/nginx/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/n.wtf.list
-`Copy
+`echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/n.wtf.gpg] https://mirror.iscas.ac.cn/sb/nginx/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/n.wtf.list`
 或
 
-`echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/n.wtf.gpg] https://mirror.nju.edu.cn/sb/nginx/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/n.wtf.list
-`Copy
+`echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/n.wtf.gpg] https://mirror.nju.edu.cn/sb/nginx/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/n.wtf.list`
 
 ## 2.4 更新并安装 Nginx
 
+```
 ```
 `apt update
 apt install nginx-extras -y
 `
 ```
+```
 Copy
 安装完毕后，我们可以使用 `nginx -V` 命令看到 Nginx 已经是最新的 1.27.0 主线版 + QUIC 了：
 
-`root@debian ~ # nginx -V
+```bash
+root@debian ~ # nginx -V
 nginx version: nginx-n.wtf/1.27.0
 built with OpenSSL 3.3.1 4 Jun 2024
 TLS SNI support enabled
-`Copy
+```
 
 ## 2.5 使用 Docker 安装
 
 你也可以使用 [Docker](https://github.com/u-sb/nginx-docker) 进行体验：
 
-`docker run --name nginx --net host --restart always -v $HOME/nginx-config:/usr/src/docker-nginx/conf:ro -d ghcr.io/u-sb/nginx
-`Copy
+`docker run --name nginx --net host --restart always -v $HOME/nginx-config:/usr/src/docker-nginx/conf:ro -d ghcr.io/u-sb/nginx`
 此时配置文件的目录在当前目录的 `nginx-config` 文件夹下。
 
-# 3、配置 Nginx
+## 3、配置 Nginx
 
 首先，HTTP/3 仅支持 HTTPS 协议，因此我们需要准备好 SSL 证书，可以参考[《Nginx 配置 SSL 证书》](/nginx-ssl/)获取 SSL 证书。
 
@@ -93,7 +100,8 @@ TLS SNI support enabled
 
 我们附上一个基本的配置示例：
 
-`server {
+```bash
+server {
 	listen 443 ssl default_server;
 	listen [::]:443 ssl default_server;
     # 开启 HTTP/3
@@ -127,12 +135,12 @@ TLS SNI support enabled
 	add_header Alt-Svc 'h3=":$server_port"; ma=86400';
     add_header X-protocol $server_protocol always;
 }
-`Copy
+```
 请注意 `listen 443 quic reuseport` 里的 `reuseport` 参数，以及 `listen 443 ssl default_server` 里的 `default_server` 参数，所有 server 段里，只允许一个段出现 `reuseport` 和 `default_server` 参数，否则会报错。
 
 另外 `listen` 段里的 `ssl` 无法和 `quic` 放一起，必须分开写两段。
 
-# 4、测试 HTTP/3
+## 4、测试 HTTP/3
 
 我们使用 Firefox 浏览器，因为目前 DNS SVCB/HTTPS 记录[尚未普及](https://taoshu.in/dns/dns-svcb-https.html)，所以第一次访问的时候，浏览器还是走 TCP 协议使用 HTTP/2 或者 HTTP/1.1 请求你的网站，获取 `Alt-Svc` 的头部信息后，才会走 HTTP/3 协议，所以第一次访问以后，可以关掉浏览器重新打开再测试。
 

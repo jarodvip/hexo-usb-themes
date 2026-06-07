@@ -1,0 +1,20 @@
+<!-- 文章目录（仅文章页加载） -->
+<button class="toc-toggle" id="toc-toggle" title="文章目录" aria-label="文章目录">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="3" y1="6" x2="21" y2="6"/>
+    <line x1="3" y1="12" x2="21" y2="12"/>
+    <line x1="3" y1="18" x2="21" y2="18"/>
+  </svg>
+</button>
+
+<div class="toc-overlay" id="toc-overlay"></div>
+
+<aside class="toc-panel" id="toc-panel" aria-hidden="true">
+  <div class="toc-header">
+    <span>文章目录</span>
+    <button class="toc-close" id="toc-close" aria-label="关闭目录">&times;</button>
+  </div>
+  <ul class="toc-list" id="toc-list">
+    <!-- 由 JS 动态生成 -->
+  </ul>
+</aside>

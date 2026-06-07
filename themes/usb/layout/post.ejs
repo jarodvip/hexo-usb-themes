@@ -6,7 +6,7 @@
       <% if (page.tags && page.tags.length > 0) { %>
       <div class="post-tags">
         <% page.tags.each(function(tag) { %>
-          <a href="<%- url_for(tag.path) %>" class="tag-link"><span><%- tag.name %></span></a>
+          <a href="<%- url_for(tag.path) %>" class="tag-link"><span>#<%- tag.name %></span></a>
         <% }); %>
       </div>
       <% } %>
@@ -16,3 +16,50 @@
     <%- page.content %>
   </div>
 </article>
+
+<!-- 文章底部信息卡片 -->
+<div class="post-footer-card">
+  <div class="post-footer-content">
+    <div class="post-footer-info">
+      <h2 class="post-footer-title"><%- page.title %></h2>
+      <div class="post-footer-url"><%- config.url %>/<%- page.path.replace(/\.html$/, '/') %></div>
+
+      <div class="post-footer-meta">
+        <div class="post-footer-meta-item">
+          <span class="meta-label">无责任编辑</span>
+          <span class="meta-value"><%- config.author || 'Showfom' %></span>
+        </div>
+        <div class="post-footer-meta-item">
+          <span class="meta-label">发布时间</span>
+          <span class="meta-value"><%- page.date.format('MMM Do, YYYY') %></span>
+        </div>
+        <div class="post-footer-meta-item">
+          <span class="meta-label">最后编辑时间</span>
+          <span class="meta-value"><%- (page.updated || page.date).format('MMM Do, YYYY') %></span>
+        </div>
+        <div class="post-footer-meta-item">
+          <span class="meta-label">版权协议</span>
+          <span class="meta-value">WTFPL</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-footer-logo">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="120" font-weight="bold" fill="#5c5c5c">U</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- 标签区域（第三段）-->
+<% if (page.tags && page.tags.length > 0) { %>
+<div class="post-footer-tags-section">
+  <div class="post-footer-tags">
+    <% page.tags.each(function(tag) { %>
+      <a href="<%- url_for(tag.path) %>" class="post-footer-tag">#<%- tag.name %></a>
+    <% }); %>
+  </div>
+</div>
+<% } %>
+

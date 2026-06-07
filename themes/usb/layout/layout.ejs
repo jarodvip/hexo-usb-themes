@@ -3,7 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= page.title ? page.title + ' - 烧饼博客' : config.title %></title>
+  <title><%
+    if (page.title) {
+      %><%= page.title + ' - 烧饼博客' %><%
+    } else if (is_archive()) {
+      %>归档 - 烧饼博客<%
+    } else if (is_tag()) {
+      %>标签 - 烧饼博客<%
+    } else {
+      %><%= config.title %><%
+    }
+  %></title>
   <meta name="description" content="<%= config.description || '' %>">
   <meta name="keywords" content="<%= config.keywords || '' %>">
 
@@ -21,9 +31,6 @@
 
   <!-- Theme CSS -->
   <link rel="stylesheet" href="<%- url_for('css/style.css') %>">
-
-  <!-- Highlight.js (for code blocks) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-on-dark.min.css">
 </head>
 <body>
   <!-- Header / Navbar -->
@@ -42,11 +49,12 @@
   <!-- Back to Top Button -->
   <%- partial('partials/back-to-top') %>
 
+  <!-- Table of Contents (仅文章页) -->
+  <% if (is_post()) { %>
+  <%- partial('partials/toc') %>
+  <% } %>
+
   <!-- Theme JS -->
   <script src="<%- url_for('js/main.js') %>"></script>
-
-  <!-- Highlight.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
 </body>
 </html>

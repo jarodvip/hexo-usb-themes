@@ -2,12 +2,14 @@
 title: Debian 使用 extrepo 配置第三方软件源
 date: 2025-10-20T00:00:00.000+00:00
 tags:
+  - debian
+  - extrepo
 cover: https://s.bh.sb/images/debian-extrepo.webp
 ---
 
 本文将指导如何在 Debian 下使用 extrepo 配置第三方软件源。
 
-# 什么是 extrepo？
+## 什么是 extrepo？
 
 [extrepo](https://packages.debian.org/stable/extrepo) 用于管理 Debian 中的外部软件源。
 
@@ -19,16 +21,18 @@ cover: https://s.bh.sb/images/debian-extrepo.webp
 
 第一种是传统的 `One-Line Style`：
 
-`curl -sSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor > /usr/share/keyrings/docker-ce.gpg
+```bash
+curl -sSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor > /usr/share/keyrings/docker-ce.gpg
 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-ce.gpg] https://download.docker.com/linux/debian $(lsb_release -sc) stable" | sudo bash -c 'cat > /etc/apt/sources.list.d/docker-ce.list'
 
 sudo apt update
 sudo install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
-`Copy
+```
 第二种是新的 `DEB822` 格式：
 
-`curl -sSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor > /usr/share/keyrings/docker-ce.gpg
+```bash
+curl -sSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor > /usr/share/keyrings/docker-ce.gpg
 
 sudo bash -c 'cat > /etc/apt/sources.list.d/docker-ce.sources << EOF
 Components: stable
@@ -41,40 +45,43 @@ EOF'
 
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
-`Copy
+```
 第三种方法则更为简单粗暴，直接运行脚本：
 
-`curl -fsSL https://get.docker.com -o get-docker.sh
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
-`Copy
+```
 在以上这些方法中（包括第三种脚本方式），我们都需要手动下载并导入 GPG 密钥，创建必要的 APT 配置文件，更新软件列表，然后再安装软件。而我们推荐使用 extrepo 的话，只需要简单的三个命令即可完成整个过程。
 
-# 安装并使用 extrepo
+## 安装并使用 extrepo
 
 Debian Stable 下直接用如下命令安装 extrepo 即可：
 
-`sudo apt update
+```bash
+sudo apt update
 sudo apt install extrepo -y
-`Copy
+```
 接着我们就可以启用比如 Docker CE 的仓库源：
 
-`sudo extrepo enable docker-ce
-`Copy
+`sudo extrepo enable docker-ce`
 然后更新系统并安装 Docker：
 
-`sudo apt update
+```bash
+sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
-`Copy
+```
 此时我们会发现在 `/etc/apt/sources.list.d` 目录中多了一个 `extrepo_docker-ce.sources` 文件：
 
-`# cat /etc/apt/sources.list.d/extrepo_docker-ce.sources 
+```bash
+# cat /etc/apt/sources.list.d/extrepo_docker-ce.sources 
 Suites: trixie
 Types: deb
 Uris: https://download.docker.com/linux/debian
 Components: stable
 Architectures: amd64 arm64 armhf s390x ppc64el
 Signed-By: /var/lib/extrepo/keys/docker-ce.asc
-`Copy
+```
 换句话说，extrepo 帮我们完成了以下工作：
 
 - 抓取经过验证的 GPG Key
@@ -83,7 +90,7 @@ Signed-By: /var/lib/extrepo/keys/docker-ce.asc
 
 对比之前的几种方法，你可能还需要满大街找配置命令，找脚本命令，现在只要敲几行命令就可以搞定，何乐而不为呢？
 
-# External Repository Metadata
+## External Repository Metadata
 
 看到这里读者可能有疑问，extrepo 的数据又是谁维护的呢？它是由 [Debian External Repositories Team](https://salsa.debian.org/extrepo-team) 维护，成员主要为志愿者（包括本文作者），数据本身也有个仓库叫做 [extrepo-data](https://salsa.debian.org/extrepo-team/extrepo-data)。
 
@@ -95,7 +102,7 @@ Signed-By: /var/lib/extrepo/keys/docker-ce.asc
 
 了解了 extrepo 的机制和优势后，我们再来总结一下。
 
-# 结论
+## 结论
 
 总之，使用 extrepo 是一种既安全又方便的添加第三方软件源的方法。
 

@@ -1,50 +1,46 @@
-<div class="archive-layout">
-  <h1 class="page-title">归档</h1>
-  <%
-    var posts = page.posts;
-    var lastYear = null;
-    var lastMonth = null;
-  %>
-  <% if (posts && posts.length > 0) { %>
-  <% posts.each(function(post) {
-    var year = post.date.year();
-    var month = post.date.month();
-  %>
-    <% if (year !== lastYear) {
-      if (lastYear !== null) { %></ul></div><% } %>
-      <div class="archive-year">
-        <h2 class="archive-year-title"><%= year %> 年</h2>
-        <ul class="archive-list">
-    <% } %>
-    <% if (month !== lastMonth) {
-      if (lastMonth !== null) { %></ul><% } %>
-      <div class="archive-month">
-        <h3 class="archive-month-title"><%= month %> 月</h3>
-        <ul class="archive-list">
-    <% } %>
-        <li class="archive-item">
-          <a href="<%- url_for(post.path) %>">
-            <time><%= post.date.format('MM-DD') %></time>
-            <span><%- post.title %></span>
-          </a>
-        </li>
-    <%
-      lastYear = year;
-      lastMonth = month;
-    }); %></ul></div></div>
-  <% } %>
+<div class="archive-page">
+  <div class="page-header">
+    <h1 class="page-title">归档</h1>
+  </div>
+
+  <div class="archive-list">
+    <% page.posts.each(function(post) { %>
+    <article class="archive-item">
+      <time class="archive-date" datetime="<%= post.date.format('YYYY-MM-DD') %>">
+        <%= post.date.format('MMMM DD, YYYY') %>
+      </time>
+      <div class="archive-content">
+        <a href="<%- url_for(post.path) %>" class="archive-link">
+          <%- post.title %>
+        </a>
+      </div>
+    </article>
+    <% }); %>
+  </div>
 </div>
 
 <% if (page.total > 1) { %>
 <nav class="pagination">
+  <% if (page.current > 1) { %>
+    <a href="<%- url_for(page.prev === 1 ? 'archives/' : 'archives/page/' + page.prev + '/') %>" class="page-link page-prev">
+      上一页
+    </a>
+  <% } %>
+
   <% for (var i = 1; i <= page.total; i++) { %>
     <% if (i === page.current) { %>
-      <a class="page-number current"><%= i %></a>
+      <span class="page-number current"><%= i %></span>
     <% } else { %>
-      <a href="<%- i === 1 ? url_for('archives/') : url_for('archives/page/' + i + '/') %>" class="page-number"><%= i %></a>
+      <a href="<%- url_for(i === 1 ? 'archives/' : 'archives/page/' + i + '/') %>" class="page-number">
+        <%= i %>
+      </a>
     <% } %>
   <% } %>
-  <% if (page.prev) { %><a href="<%- url_for('archives/' + page.prev) %>" class="prev">&lt;</a><% } %>
-  <% if (page.next) { %><a href="<%- url_for('archives/' + page.next) %>" class="next">&gt;</a><% } %>
+
+  <% if (page.current < page.total) { %>
+    <a href="<%- url_for('archives/page/' + page.next + '/') %>" class="page-link page-next">
+      下一页
+    </a>
+  <% } %>
 </nav>
 <% } %>

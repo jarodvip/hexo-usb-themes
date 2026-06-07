@@ -2,6 +2,8 @@
 title: Docker 安装 Shlink 自建短网址
 date: 2026-01-18T00:00:00.000+00:00
 tags:
+  - debian
+  - ubuntu
 cover: https://s.bh.sb/images/docker-shlink.webp
 ---
 
@@ -9,7 +11,7 @@ cover: https://s.bh.sb/images/docker-shlink.webp
 
 *PS：本文同时适用于任何可安装 Docker 的 Linux 发行版。*
 
-# 什么是短网址？
+## 什么是短网址？
 
 短网址，即 URL Shortener (缩略网址服务)，一般我们使用 `HTTP 协议` 的 `301` 或 `302` 响应码，现在也有使用 `307` 或 `308` 来跳转一个长网址，简单的区别：
 
@@ -27,16 +29,17 @@ MDN 上有对这几个状态码的详细介绍：
 
 举一个典型的 `301` 跳转的例子：
 
-`root@debian ~ # curl -I http://u.sb/ -A Mozilla
+```bash
+root@debian ~ # curl -I http://u.sb/ -A Mozilla
 HTTP/1.1 301 Moved Permanently
 Date: Tue, 26 Apr 2022 18:28:14 GMT
 Content-Type: text/html
 Content-Length: 162
 Location: https://u.sb/
-`Copy
+```
 我们可以看到，使用浏览器访问 `http://u.sb/` 的时候，会返回 `HTTP/1.1 301 Moved Permanently` 状态，对应跳转到 Location `https://u.sb/`。
 
-# 市面上开源和收费的短网址源码
+## 市面上开源和收费的短网址源码
 
 众所周知，本人的短域名贼多，对各种短网址程序都有所研究，市面上主要有这几款免费的短网址程序：
 
@@ -56,28 +59,31 @@ Location: https://u.sb/
 
 广告：因为市面上没有好用的收费短网址，所以我们做了一个 [S.EE](https://s.ee/) 欢迎购买使用~
 
-# 安装 Docker 和 Docker Compose
+## 安装 Docker 和 Docker Compose
 
 Debian 和 Ubuntu 系统请参考[本站教程](/debian-install-docker/)。
 
 其他 Linux 系统可以使用 Docker 官方的脚本安装 Docker 和 Docker Compose：
 
-`curl -fsSL https://get.docker.com -o get-docker.sh
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
-`Copy
+```
 
-# 安装 Shlink Server 和 Web Client
+## 安装 Shlink Server 和 Web Client
 
 参考官网的[安装教程](https://shlink.io/documentation/install-docker-image/)，我们可以把 Server 和 Web Client 装在一个地方方便管理。
 
 首先我们新建 `/opt/shlink` 和 `/opt/shlink/data` 目录：
 
-`mkdir -p /opt/shlink
+```bash
+mkdir -p /opt/shlink
 mkdir -p /opt/shlink/data
-`Copy
+```
 然后我们新建一个 `compose.yaml` 文件，假设你的域名是 `example.com`，放在 `/opt/shlink/compose.yaml`：
 
-`cat > /opt/shlink/compose.yaml << EOF
+```bash
+cat > /opt/shlink/compose.yaml << EOF
 services:
     shlink:
       image: shlinkio/shlink:stable
@@ -128,10 +134,11 @@ services:
           - 127.0.0.1:8081:8080
         restart: always
 EOF
-`Copy
+```
 如果希望有用户登录等功能，则可以用官方的下一代面板 [shlink-dashboard](https://github.com/shlinkio/shlink-dashboard)，这里我们可以让 `shlink-dashboard` 容器和 `shlink` 容器共用一个 MariaDB 容器和用户，首先还是一样建立 docker compose 文件：
 
-`cat > /opt/shlink/compose.yaml << EOF
+```bash
+cat > /opt/shlink/compose.yaml << EOF
 services:
     shlink:
       image: shlinkio/shlink:stable
@@ -194,29 +201,31 @@ services:
           condition: service_healthy
       restart: always
 EOF
-`Copy
+```
 然后创建一个 `/opt/shlink/mariadb-init/01-create-databases.sql` 文件
 
 `mkdir -p /opt/shlink/mariadb-init
 
 cat > /opt/shlink/mariadb-init/01-create-databases.sql << 'EOF'
 CREATE DATABASE IF NOT EXISTS `shlink-dashboard`;
-GRANT ALL PRIVILEGES ON `shlink-dashboard`.* TO 'shlink'@'%';
+GRANT ALL PRIVILEGES ON `shlink-dashboard```bash
+.* TO 'shlink'@'%';
 FLUSH PRIVILEGES;
 EOF
-`Copy
+```
 然后我们可以先启动 MariaDB 容器创建用户和数据库：
 
-`cd /opt/shlink
+```bash
+cd /opt/shlink
 docker compose up db -d
-`Copy
+```
 验证下是否成功：
 
-`docker exec -it db mariadb -u root -p'随机密码2' -e "SHOW DATABASES;"
-`Copy
+`docker exec -it db mariadb -u root -p'随机密码2' -e "SHOW DATABASES;"`
 看到有 `shlink` 和 `shlink-dashboard` 两个数据库就成功了：
 
-`# docker exec -it db mariadb -u root -p'随机密码2' -e "SHOW DATABASES;"
+```bash
+# docker exec -it db mariadb -u root -p'随机密码2' -e "SHOW DATABASES;"
 +--------------------+
 | Database           |
 +--------------------+
@@ -227,7 +236,7 @@ docker compose up db -d
 | shlink-dashboard   |
 | sys                |
 +--------------------+
-`Copy
+```
 注意：
 
 `GEOLITE_LICENSE_KEY` 需要在 [Maxmind](https://www.maxmind.com/) 注册帐号获取，可以参考《[使用 Docker 安装 Plausible Analytics 自建网站统计](/docker-plausible/#%E5%AE%89%E8%A3%85-plausible-analytics-t2)》
@@ -238,30 +247,30 @@ docker compose up db -d
 
 然后拉取所有的 Docker 镜像并运行：
 
-`docker compose pull
+```bash
+docker compose pull
 docker compose up -d
-`Copy
+```
 然后获取一个 API Key：
 
-`docker exec -it shlink shlink api-key:generate
-`Copy
+`docker exec -it shlink shlink api-key:generate`
 ![image.png](https://s.bh.sb/uploads/2022/04/27/F3ehKWInwVkqQdD.png)
 
 注意第一个 `shlink` 是 Docker 容器名字，第二个 `shlink` 是命令名称。
 
 所有 API 命令如下：
 
-`docker exec -it shlink shlink
-`Copy
+`docker exec -it shlink shlink`
 记得保存你的 API Key，下面会要用到。
 
-# 安装配置 Nginx 反代
+## 安装配置 Nginx 反代
 
 我们的 Docker Compose 配置文件中，Shlink Server 服务监听在 `127.0.0.1:8080` 端口，Shlink Web Client 监听在 `127.0.0.1:8081` 端口，所以我们需要配置 Nginx 反代来访问，假设你短网址是 `https://example.com/` Web 客户端是 `https://app.example.com/`
 
 `example.com` 段配置：
 
-`	location / {
+```bash
+location / {
 		proxy_set_header X-Real-IP $remote_addr;
 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 		proxy_set_header Host $http_host;
@@ -275,10 +284,11 @@ docker compose up -d
 		send_timeout                300;
 		proxy_pass http://127.0.0.1:8080;
 	}
-`Copy
+```
 `app.example.com` 段配置：
 
-`	location / {
+```bash
+location / {
 		proxy_set_header X-Real-IP $remote_addr;
 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 		proxy_set_header Host $http_host;
@@ -292,7 +302,7 @@ docker compose up -d
 		send_timeout                300;
 		proxy_pass http://127.0.0.1:8081;
 	}
-`Copy
+```
 最后记得参考本站 [Nginx SSL 配置教程](/nginx-ssl/)加上 SSL 证书后，即可访问 `https://app.example.com/`：
 
 点击 `+ Add a server` 添加你的 Shlink 服务：
@@ -311,31 +321,30 @@ docker compose up -d
 
 如果搭建的 Shlink Dashboard，则默认账号密码都是 `admin`， 登录以后记得修改哦！
 
-# 升级 Shlink
+## 升级 Shlink
 
 直接使用 Docker Compose 升级并删除旧的镜像文件：
 
-`cd /opt/shlink
+```bash
+cd /opt/shlink
 docker compose pull
 docker compose up -d
 docker system prune -f
-`Copy
+```
 切记不要跨多个版本升级，最好按照每个小版本的最新补丁顺序更新 Shlink。
 
 比如，要从 `3.2.1` 版本升级到 `3.4.0`，先更新到 `3.3.2`，然后再升级到 `3.4.0`，可以自行替换 Docker 镜像里的 `stable` 标签为具体版本号来更新升级。
 
-# 迁移 Shlink
+## 迁移 Shlink
 
 可以参考《[使用 Docker 安装 Mailcow 自建域名邮箱](/docker-mailcow/#mailcow-%E7%9A%84%E8%BF%81%E7%A7%BB-t2)》。
 
-# 备份 Shlink
+## 备份 Shlink
 
 我们可以定期备份数据库，导出命令如下：
 
-`docker exec db mariadb-dump -u root --password='随机密码2' --databases shlink > shlink-all-$(date +"%Y_%m_%d_%I_%M_%p").sql
-`Copy
+`docker exec db mariadb-dump -u root --password='随机密码2' --databases shlink > shlink-all-$(date +"%Y_%m_%d_%I_%M_%p").sql`
 如果装了 `shlink-dashboard`：
 
-`docker exec db mariadb-dump -u root --password='随机密码2' --databases shlink shlink-dashboard > shlink-all-$(date +"%Y_%m_%d_%I_%M_%p").sql
-`Copy
+`docker exec db mariadb-dump -u root --password='随机密码2' --databases shlink shlink-dashboard > shlink-all-$(date +"%Y_%m_%d_%I_%M_%p").sql`
 请替换 `随机密码2` 为你的数据库 `root` 密码。

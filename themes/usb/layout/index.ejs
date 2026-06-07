@@ -9,32 +9,36 @@
       <% } %>
     </a>
     <div class="post-card-body">
-      <h2 class="post-card-title"><%- post.title %></h2>
-      <p class="post-card-excerpt">
-        <%
-          var excerpt = '';
-          if (post.excerpt && post.excerpt.trim()) {
-            // Extract first paragraph: between first <p> and </p>
-            var pMatch = post.excerpt.match(/<p[^>]*>(.*?)<\/p>/i);
-            if (pMatch) {
-              excerpt = pMatch[1].replace(/<[^>]+>/g, '').trim();
+      <a href="<%- url_for(post.path) %>">
+        <h2 class="post-card-title"><%- post.title %></h2>
+      </a>
+      <a href="<%- url_for(post.path) %>">
+        <p class="post-card-excerpt">
+          <%
+            var excerpt = '';
+            if (post.excerpt && post.excerpt.trim()) {
+              // Extract first paragraph: between first <p> and </p>
+              var pMatch = post.excerpt.match(/<p[^>]*>(.*?)<\/p>/i);
+              if (pMatch) {
+                excerpt = pMatch[1].replace(/<[^>]+>/g, '').trim();
+              }
+            } else if (post.content && post.content.trim()) {
+              var pMatch = post.content.match(/<p[^>]*>(.*?)<\/p>/i);
+              if (pMatch) {
+                excerpt = pMatch[1].replace(/<[^>]+>/g, '').trim();
+              }
             }
-          } else if (post.content && post.content.trim()) {
-            var pMatch = post.content.match(/<p[^>]*>(.*?)<\/p>/i);
-            if (pMatch) {
-              excerpt = pMatch[1].replace(/<[^>]+>/g, '').trim();
-            }
-          }
-          if (!excerpt) excerpt = '暂无摘要…';
-        %>
-        <%- excerpt %>
-      </p>
+            if (!excerpt) excerpt = '暂无摘要…';
+          %>
+          <%- excerpt %>
+        </p>
+      </a>
       <% if (theme.show_tags && post.tags && post.tags.length > 0) { %>
       <div class="post-card-tags">
         <% post.tags.each(function(tag, i) { %>
-          <% if (i < 5) { %>
+          <% if (i < 2) { %>
           <a href="<%- url_for(tag.path) %>" class="tag-link">
-            <span><%- tag.name %></span>
+            <span>#<%- tag.name %></span>
           </a>
           <% } %>
         <% }); %>
@@ -57,14 +61,18 @@
 <!-- Pagination -->
 <% if (page.total > 1) { %>
 <nav class="pagination">
+  <% if (page.prev) { %>
+    <a href="<%- page.prev === 1 ? url_for('/') : url_for('page/' + page.prev + '/') %>" class="prev">&lt;</a>
+  <% } %>
   <% for (var i = 1; i <= page.total; i++) { %>
     <% if (i === page.current) { %>
       <a class="page-number current"><%= i %></a>
     <% } else { %>
-      <a href="<%- i === 1 ? url_for() : url_for('page/' + i + '/') %>" class="page-number"><%= i %></a>
+      <a href="<%- i === 1 ? url_for('/') : url_for('page/' + i + '/') %>" class="page-number"><%= i %></a>
     <% } %>
   <% } %>
-  <% if (page.prev) { %><a href="<%- url_for(page.prev) %>" class="prev">&lt;</a><% } %>
-  <% if (page.next) { %><a href="<%- url_for(page.next) %>" class="next">&gt;</a><% } %>
+  <% if (page.next) { %>
+    <a href="<%- url_for('page/' + page.next + '/') %>" class="next">&gt;</a>
+  <% } %>
 </nav>
 <% } %>

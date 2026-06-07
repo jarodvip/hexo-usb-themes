@@ -11,13 +11,13 @@ accent_color: "#ffdb33"
 # 导航菜单 (key: 显示名称, value: 链接)
 menu:
   首页: /
-  标签: /tags
-  归档: /archives
-  友链: /
-  关于: /about
-  联系: /contact
-  捐赠: /donate
-  免责声明: /disclaimer
+  标签: /tags/
+  归档: /archives/
+  友链: /links/
+  关于: /about/
+  联系: /contact/
+  捐赠: https://nm.sl/
+  免责声明: /disclaimer/
 
 # 社交链接 (显示为 footer 图标)
 social:

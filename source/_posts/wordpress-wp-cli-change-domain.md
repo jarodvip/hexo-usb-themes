@@ -2,6 +2,8 @@
 title: WordPress 使用 WP-CLI 批量更换域名
 date: 2022-03-22T00:00:00.000+00:00
 tags:
+  - wordpress
+  - wp-cli
 cover: https://s.bh.sb/images/wordpress-wp-cli-change-domain.webp
 ---
 
@@ -9,23 +11,25 @@ cover: https://s.bh.sb/images/wordpress-wp-cli-change-domain.webp
 
 *PS：本文同时适用于任意 Linux 系统，请自行承担使用风险*
 
-# 前提背景
+## 前提背景
 
 有时候我们需要给 [WordPress](https://wordpress.org/) 更换域名，大多数网上的教程是要你从 [phpMyAdmin](https://www.phpmyadmin.net/) 提交 SQL 语句，而且大多数教程要你修改的表就两个，实际上有三个。
 
 对于本站的读者来说，我们都有 `root` 权限了，不需要这货，此时我们直接拿出大杀器，WordPress 官方的 [`WP-CLI`](https://wp-cli.org/) 工具。
 
-# 安装 WP-CLI
+## 安装 WP-CLI
 
 按照[官方教程](https://wp-cli.org/#installing)，直接安装：
 
-`wget -O wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+```bash
+wget -O wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
-`Copy
+```
 此时即可通过 `wp --info` 命令查看 `WP-CLI` 信息：
 
-`root@wordpress ~ # sudo -u www-data wp --info
+```bash
+root@wordpress ~ # sudo -u www-data wp --info
 OS:	Linux 5.10.0-11-cloud-amd64 #1 SMP Debian 5.10.92-2 (2022-02-28) x86_64
 Shell:	/usr/sbin/nologin
 PHP binary:	/usr/bin/php8.1
@@ -41,20 +45,22 @@ WP-CLI packages dir:
 WP-CLI global config:	
 WP-CLI project config:	
 WP-CLI version:	2.6.0
-`Copy
+```
 
-# 批量替换 WordPress 域名
+## 批量替换 WordPress 域名
 
 首先，按照本站的 [LEMP](/debian-install-nginx-php-mysql/) 或 [LAMP](/debian-install-apache-php-mysql/) 教程，复制一份 Nginx 或 Apache 的配置，让其同时生效新旧域名，记得 SSL 证书也需要更新。
 
 然后，进入 WordPress 的安装目录，假设目录为 `/var/www/example.com` 旧的 URL 为 `https://old.example.com`，需要替换的新的 URL 为 `https://new.example.com`：
 
-`cd /var/www/example.com
+```bash
+cd /var/www/example.com
 sudo -u www-data wp search-replace 'https://old.example.com' 'https://new.example.com' --dry-run
-`Copy
+```
 此时并不会真正施行替换命令，因为我们加了 `--dry-run` 参数，你可以看到需要替换的条目数是否和预估的匹配：
 
-`root@wordpress /var/www/example.com # sudo -u www-data wp search-replace 'https://old.example.com' 'https://new.example.com' --dry-run
+```bash
+root@wordpress /var/www/example.com # sudo -u www-data wp search-replace 'https://old.example.com' 'https://new.example.com' --dry-run
 +------------------+-----------------------+--------------+------+
 | Table            | Column                | Replacements | Type |
 +------------------+-----------------------+--------------+------+
@@ -112,25 +118,27 @@ sudo -u www-data wp search-replace 'https://old.example.com' 'https://new.exampl
 | wp_users         | display_name          | 0            | SQL  |
 +------------------+-----------------------+--------------+------+
 Success: 19664 replacements to be made.
-`Copy
+```
 我们可以看到，基本上就 `comment_content`，`post_content` 和 `guid` 需要替换，没有问题的话就直接执行：
 
-`cd /var/www/example.com
+```bash
+cd /var/www/example.com
 sudo -u www-data wp search-replace 'https://old.example.com' 'https://new.example.com'
-`Copy
+```
 执行完成后会出现类似 `Success: Made 19664 replacements.` 的提示。
 
 注意，如果之前没有开启过 HTTPS，那么你可能需要使用 `http://old.example.com` 来替换，建议执行两次，不推荐直接执行替换 `old.example.com`。
 
-# 修改 wp-config.php
+## 修改 wp-config.php
 
 我们也可以打开 `wp-config.php`，加入下面两行代码来完成新的域名替换：
 
-`define('WP_HOME','https://new.example.com/');
+```bash
+define('WP_HOME','https://new.example.com/');
 define('WP_SITEURL','https://new.example.com/');
-`Copy
+```
 
-# 修改 WordPress 后台设置
+## 修改 WordPress 后台设置
 
 我们也可以进入 WordPress 后台，在常规设置里更换新的域名，进入 `https://new.example.com/wp-admin/options-general.php` 然后更换 `WordPress 地址（URL）` 和 `站点地址（URL）`
 
@@ -142,15 +150,18 @@ define('WP_SITEURL','https://new.example.com/');
 
 Nginx 配置如下
 
-`server_name old.example.com;
+```bash
+server_name old.example.com;
 return 301 https://new.example.com$request_uri;
-`Copy
+```
 Apache 配置如下
 
+```
 ```
 `RewriteEngine On
 RewriteCond %{HTTP_HOST} ^old.example.com [NC]
 RewriteRule ^(.*)$ https://new.example.com$1 [R=301,L]
 `
+```
 ```
 Copy

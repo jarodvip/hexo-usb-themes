@@ -2,6 +2,11 @@
 title: Debian / Ubuntu 下使用 nginx-acme 自动签发并配置 SSL 证书
 date: 2026-05-20T00:00:00.000+00:00
 tags:
+  - nginx
+  - ssl
+  - nginx-acme
+  - debian
+  - ubuntu
 cover: https://s.bh.sb/images/debian-nginx-acme.webp
 ---
 
@@ -9,7 +14,7 @@ cover: https://s.bh.sb/images/debian-nginx-acme.webp
 
 本文适合 Debian Stable 和 Ubuntu LTS，请使用 root 用户进行操作。
 
-# 1、什么是 nginx-acme
+## 1、什么是 nginx-acme
 
 [nginx-acme](https://github.com/nginx/nginx-acme) 是 Nginx 官方开发的基于 ACME 协议自动签发 SSL 证书的模块，隔壁 Caddy 都出了几百年的功能， Nginx 也终于赶上了。
 
@@ -17,55 +22,62 @@ cover: https://s.bh.sb/images/debian-nginx-acme.webp
 
 这个模块支持 [RFC8555](https://datatracker.ietf.org/doc/html/rfc8555)、[RFC8737](https://datatracker.ietf.org/doc/html/rfc8737)、[RFC8738](https://datatracker.ietf.org/doc/html/rfc8738) 和 [draft-ietf-acme-profiles](https://datatracker.ietf.org/doc/draft-ietf-acme-profiles/) 等规范，目前我实际测试下来已经基本可以用于生产环境。
 
-# 2、安装 N.WTF
+## 2、安装 N.WTF
 
 这里我们使用[烧饼博客](https://u.sb/)打包的 [N.WTF](https://n.wtf/)，这个项目已经集成了 `nginx-acme` 模块，可以做到开箱即用。
 
 首先，安装一些必要的软件包：
 
-`sudo apt update
+```bash
+sudo apt update
 sudo apt upgrade -y
 sudo apt install curl vim wget gnupg dpkg apt-transport-https lsb-release ca-certificates
-`Copy
+```
 然后加入 N.WTF 的 GPG 公钥和 apt 源：
 
-`curl -sSL https://n.wtf/public.key | sudo bash -c 'gpg --dearmor > /usr/share/keyrings/n.wtf.gpg'
+```bash
+curl -sSL https://n.wtf/public.key | sudo bash -c 'gpg --dearmor > /usr/share/keyrings/n.wtf.gpg'
 sudo bash -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/n.wtf.gpg] https://mirror-cdn.xtom.com/sb/nginx/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/n.wtf.list'
-`Copy
+```
 国内机器可以用[清华 TUNA](https://mirrors.tuna.tsinghua.edu.cn/) 的国内源：
 
-`curl -sSL https://mirrors.tuna.tsinghua.edu.cn/n.wtf/public.key | sudo bash -c 'gpg --dearmor > /usr/share/keyrings/n.wtf.gpg'
+```bash
+curl -sSL https://mirrors.tuna.tsinghua.edu.cn/n.wtf/public.key | sudo bash -c 'gpg --dearmor > /usr/share/keyrings/n.wtf.gpg'
 sudo bash -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/n.wtf.gpg] https://mirrors.tuna.tsinghua.edu.cn/n.wtf/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/n.wtf.list'
-`Copy
+```
 Debian 下也可以直接使用 [extrepo](/debian-extrepo/):
 
-`sudo apt update
+```bash
+sudo apt update
 sudo apt install extrepo -y
 sudo extrepo enable n.wtf
-`Copy
+```
 接着更新系统并安装 Nginx：
 
-`sudo apt update
+```bash
+sudo apt update
 sudo apt install nginx-extras -y
-`Copy
+```
 
-# 3、nginx-acme 准备工作
+## 3、nginx-acme 准备工作
 
 准备工作很简单，我们需要建立一个目录来存放 SSL 证书并给予正确的权限，这里我们以 `/var/cache/nginx/letsencrypt` 为演示：
 
-`sudo mkdir -p /var/cache/nginx
+```bash
+sudo mkdir -p /var/cache/nginx
 sudo mkdir -p /var/cache/nginx/letsencrypt
 sudo chown 33:33 /var/cache/nginx -R
-`Copy
+```
 然后别忘了把域名解析到你的服务器哦！
 
-# 4、配置 Nginx 站点
+## 4、配置 Nginx 站点
 
 我们以 `example.com` 为例，假设你的邮箱是 `[[email protected]](/cdn-cgi/l/email-protection)`，需要配置的域名是 `example.com` 和 `www.example.com`，并且希望访问 `www.example.com` 跳转到 `example.com`：
 
 直接修改 `/etc/nginx/sites-enabled/default` 文件：
 
-`resolver 8.8.8.8:53 ipv6=off valid=5s;
+```bash
+resolver 8.8.8.8:53 ipv6=off valid=5s;
 
 acme_issuer letsencrypt {
     uri         https://acme-v02.api.letsencrypt.org/directory;
@@ -155,15 +167,17 @@ server {
     # do not parse the certificate on each request
     ssl_certificate_cache max=2;
 }
-`Copy
+```
 然后验证 Nginx 配置并重新加载：
 
-`sudo nginx -t
+```bash
+sudo nginx -t
 sudo nginx -s reload
-`Copy
+```
 此时，在默认的 Nginx 日志文件 `/var/log/nginx/access.log` 中可以看到 Let's Encrypt 验证服务器的请求记录：
 
-`23.178.112.210 - - [15/Jan/2026:16:08:18 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)"
+```bash
+23.178.112.210 - - [15/Jan/2026:16:08:18 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)"
 34.212.137.78 - - [15/Jan/2026:16:08:18 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)"
 18.222.179.58 - - [15/Jan/2026:16:08:18 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)"
 16.171.19.61 - - [15/Jan/2026:16:08:18 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)"
@@ -173,7 +187,7 @@ sudo nginx -s reload
 2600:1f16:269:da00:c9ce:508c:ea69:9c2 - - [15/Jan/2026:16:08:20 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)"
 2a05:d016:39f:3101:8b83:62b8:2603:d15d - - [15/Jan/2026:16:08:20 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)"
 2406:da18:85:1401:1f69:967a:a988:cdc8 - - [15/Jan/2026:16:08:20 +0000] "GET /.well-known/acme-challenge/blablablablablablablablablablablablablablab HTTP/1.1" 200 87 "-" "Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)"
-`Copy
+```
 等待数秒后即可访问 `https://example.com/` 了。
 
 如果要给 IP 地址签发证书，则需要在 `acme_issuer letsencrypt {}` 段里添加一行 `profile shortlived;`，并且 `server_name` 必须写入完整的 IP 地址，不能直接用 `server_name _` 哦。

@@ -1,0 +1,13 @@
+<div class="page-article">
+  <div class="page-header">
+    <h1 class="page-title">本博客无分类，所有文章均以标签归类</h1>
+  </div>
+
+  <div class="tag-cloud">
+    <% site.tags.sort('name').each(function(tag) { %>
+      <a href="<%- url_for(tag.path) %>" class="tag-cloud-item">
+        <span><%- tag.name %></span>
+      </a>
+    <% }); %>
+  </div>
+</div>

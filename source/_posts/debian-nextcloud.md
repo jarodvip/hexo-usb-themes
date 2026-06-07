@@ -2,6 +2,8 @@
 title: Debian 安装 Nextcloud 服务端
 date: 2025-10-20T00:00:00.000+00:00
 tags:
+  - debian
+  - nextcloud
 cover: https://s.bh.sb/images/debian-nextcloud.webp
 ---
 
@@ -11,7 +13,7 @@ cover: https://s.bh.sb/images/debian-nextcloud.webp
 
 以下操作需要在 root 用户下完成，请使用 `sudo -i` 或 `su root` 切换到 root 用户进行操作。
 
-# 什么是 Nextcloud？
+## 什么是 Nextcloud？
 
 [Nextcloud](https://nextcloud.com/) 是一套用于建立网络硬盘的客户端和服务器软件。其功能和 Dropbox 相近，但 Nextcloud 是开源的，任何人都可以在自己的服务器上安装并运行它。
 
@@ -19,28 +21,29 @@ cover: https://s.bh.sb/images/debian-nextcloud.webp
 
 安装之前你可以先去官方的 [Demo](https://try.nextcloud.com/access) 体验。
 
-# 准备环境
+## 准备环境
 
 由于 Nextcloud 消耗资源比较大，一般我们不建议在 4GB 内存以下的 VPS 安装，官方[推荐配置](https://docs.nextcloud.com/server/stable/admin_manual/installation/system_requirements.html)为 512MB 内存，实际体验下来安装在 8GB 内存上跑 Nextcloud 会比较流畅。
 
-# 配置 LEMP 环境
+## 配置 LEMP 环境
 
 首先，可以参考本站[教程](/debian-install-nginx-php-mysql/)配置好 LEMP 环境，在安装 PHP 的时候，请选择 PHP 8.3 以及以下模块：
 
-`apt install php8.4-{common,fpm,mysql,curl,gd,mbstring,xml,xmlrpc,zip,bz2,intl,ldap,smbclient,bcmath,gmp,imap,opcache,imagick,redis} imagemagick redis-server -y
-`Copy
+`apt install php8.4-{common,fpm,mysql,curl,gd,mbstring,xml,xmlrpc,zip,bz2,intl,ldap,smbclient,bcmath,gmp,imap,opcache,imagick,redis} imagemagick redis-server -y`
 这里我们使用了 Redis 作为缓存，所以需要安装 `redis-server` 和 `php8.4-redis`，请不要直接安装 `php-redis`，否则系统会默认把所有的 PHP 版本都给你安装一遍哦。
 
 如果想用最新的官方 Redis 的话可以添加官方源：
 
-`curl -sSL https://packages.redis.io/gpg | gpg --dearmor > /usr/share/keyrings/redis-archive-keyring.gpg
+```bash
+curl -sSL https://packages.redis.io/gpg | gpg --dearmor > /usr/share/keyrings/redis-archive-keyring.gpg
 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" > /etc/apt/sources.list.d/redis.list
 
 apt update
 apt install redis-server -y
-`Copy
+```
 
+```
 ```
 `curl -sSL https://packages.redis.io/gpg | gpg --dearmor > /usr/share/keyrings/redis-archive-keyring.gpg
 
@@ -57,8 +60,10 @@ apt update
 apt install redis-server -y
 `
 ```
+```
 Copy
 
+```
 ```
 `apt install extrepo -y
 extrepo enable redis
@@ -66,13 +71,15 @@ apt update
 apt install redis-server -y
 `
 ```
+```
 Copy
 
-# 优化 PHP-FPM 设置
+## 优化 PHP-FPM 设置
 
 由于默认的 PHP-FPM 设置只适合小型应用，不适合 Nextcloud 这种消耗资源比较大的程序，所以我们可以修改如下参数，这里的例子是你想设置最大上传的文件为 10GB：
 
-`sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/' /etc/php/8.4/fpm/php.ini 
+```bash
+sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/' /etc/php/8.4/fpm/php.ini 
 sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 10240M/' /etc/php/8.4/fpm/php.ini
 sed -i 's/post_max_size = 8M/post_max_size = 10240M/' /etc/php/8.4/fpm/php.ini
 sed -i 's/memory_limit = 128M/memory_limit = 512M/' /etc/php/8.4/fpm/php.ini
@@ -83,15 +90,14 @@ sed -i 's/pm.start_servers = 2/pm.start_servers = 4/' /etc/php/8.4/fpm/pool.d/ww
 sed -i 's/pm.min_spare_servers = 1/pm.min_spare_servers = 2/' /etc/php/8.4/fpm/pool.d/www.conf
 sed -i 's/pm.max_spare_servers = 3/pm.max_spare_servers = 8/' /etc/php/8.4/fpm/pool.d/www.conf
 sed -i 's/;clear_env = no/clear_env = no/' /etc/php/8.4/fpm/pool.d/www.conf
-`Copy
+```
 具体配置可以参考[官网教程](https://docs.nextcloud.com/server/stable/admin_manual/installation/source_installation.html)。
 
 然后我们重启 PHP-FPM 生效：
 
-`systemctl restart php8.4-fpm.service
-`Copy
+`systemctl restart php8.4-fpm.service`
 
-# 配置 Nginx
+## 配置 Nginx
 
 我们假设你的 Nextcloud 需要安装在 `/var/www/nextcloud` 目录，配置的域名是 `cloud.example.com`，证书文件位于 `/etc/nginx/ssl/cloud.example.com.crt`，证书私钥位于 `/etc/nginx/ssl/cloud.example.com.key`，那么我们直接参考官网上的[第三方教程](https://docs.nextcloud.com/server/stable/admin_manual/installation/nginx.html)配置 Nginx：
 
@@ -100,7 +106,7 @@ sed -i 's/;clear_env = no/clear_env = no/' /etc/php/8.4/fpm/pool.d/www.conf
     server unix:/var/run/php/php8.4-fpm.sock;
 }
 
-# Set the `immutable` cache control options only for assets with a cache busting `v` argument
+## Set the `immutable` cache control options only for assets with a cache busting `v` argument
 map $arg_v $asset_immutable {
     "" "";
     default "immutable";
@@ -264,8 +270,8 @@ ssl_prefer_server_ciphers off;
         access_log off;     # Optional: Don't log access to assets
     }
 
-    # Rule borrowed from `.htaccess`
-    location /remote {
+    # Rule borrowed from `.htaccess```bash
+location /remote {
         return 301 /remote.php$request_uri;
     }
 
@@ -273,44 +279,47 @@ ssl_prefer_server_ciphers off;
         try_files $uri $uri/ /index.php$request_uri;
     }
 }
-`Copy
+```
 关于 SSL 配置可以参考本站教程《[Nginx 配置 SSL 证书](/nginx-ssl/)》和《[使用 acme.sh 配置自动续签 SSL 证书](/acme-sh-ssl/)》。
 
 如果要修改上传文件大小限制，请求改 Nginx 配置里的 `client_max_body_size 10240M;` 和 PHP 配置里的 `upload_max_filesize` 和 `post_max_size` 参数，本教程举例是上传文件最大限制 10GB。
 
 检查无误后重启 Nginx 生效
 
-`nginx -t
+```bash
+nginx -t
 nginx -s reload
-`Copy
+```
 
-# 安装 Nextcloud
+## 安装 Nextcloud
 
 首先进入 `/var/www` 目录，下载并解压最新的 Nextcloud：
 
-`cd /var/www
+```bash
+cd /var/www
 wget -O nextcloud.zip https://download.nextcloud.com/server/releases/latest.zip
 unzip nextcloud.zip
-`Copy
+```
 然后我们设置解压出来的 `nextcloud` 文件夹权限和 PHP 以及 Nginx 对应，设置为 `www-data` 用户，因为 Debian 下默认 `www-data` 用户/用户组的 uid 和 gid 是 33，所以直接使用 `chown 33:33` 即可：
 
-`chown 33:33 nextcloud -R
+```bash
+chown 33:33 nextcloud -R
 find nextcloud/ -type d -exec chmod 750 {} \;
 find nextcloud/ -type f -exec chmod 640 {} \;
-`Copy
+```
 安装完成后，直接访问 `https://cloud.example.com` 填入你配置好的数据库信息以及管理员帐号密码即可登录你的 Nextcloud。
 
-# 配置 Redis 缓存
+## 配置 Redis 缓存
 
 Debian 默认安装的 `redis-server` 已经给你基本配置好了，只监听在本地 `127.0.0.1` 的 `6379` 端口，如果没有特殊需求不需要修改。
 
 首先，我们把 `redis` 用户加入 `www-data` 用户组：
 
-`usermod -a -G redis www-data
-`Copy
+`usermod -a -G redis www-data`
 然后修改 `/var/www/nextcloud/config/config.php` 文件，在最后一行 `);` 字符前加入：
 
-`  'memcache.locking' => '\\OC\\Memcache\\Redis',
+```bash
+'memcache.locking' => '\\OC\\Memcache\\Redis',
   'memcache.distributed' => '\\OC\\Memcache\\Redis',
   'memcache.local' => '\\OC\\Memcache\\Redis',
   'redis' => 
@@ -318,48 +327,46 @@ Debian 默认安装的 `redis-server` 已经给你基本配置好了，只监听
     'host' => '127.0.0.1',
     'port' => 6379,
   ),
-`Copy
+```
 重启 PHP-FPM 生效：
 
-`systemctl restart php8.4-fpm
-`Copy
+`systemctl restart php8.4-fpm`
 其他缓存方式可以参考[官方文档](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/caching_configuration.html)。
 
 如果没有问题，可以访问 `https://cloud.example.com/settings/admin/serverinfo` 查看服务器信息了。
 
-# 配置 Crontab
+## 配置 Crontab
 
 我们需要使用 Linux 内置的 cron 来运行自动化任务，直接使用 www-data 用户修改定时任务：
 
-`crontab -u www-data -e
-`Copy
+`crontab -u www-data -e`
 选择一款你喜欢的编辑器然后加入：
 
-`*/5  *  *  *  * /usr/bin/php -f /var/www/nextcloud/cron.php
-`Copy
+`*/5  *  *  *  * /usr/bin/php -f /var/www/nextcloud/cron.php`
 这个命令的含义是每 5 分钟执行一次 Nextcloud 的定时任务，具体可以参考[官网教程](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/background_jobs_configuration.html)。
 
 保存后可以使用 `crontab -u www-data -l` 命令查看当前 `www-data` 用户下的定时任务。
 
-# 安装 Nextcloud 客户端
+## 安装 Nextcloud 客户端
 
 这里就不再赘述了，直接从[官网](https://nextcloud.com/install/)下载并安装对应操作系统的软件即可，登录的时候输入完整的网址 `https://cloud.example.com/` 即可登录你自己的 Nextcloud。
 
 ![Nextcloud Demo](https://s.bh.sb/2025/10/20/nextcloud_KAJxG.webp)
 
-# Nextcloud 更新
+## Nextcloud 更新
 
 如果你的用户和数据不多，直接用管理员访问 `https://cloud.example.com/updater/` 即可更新到最新稳定版本。
 
 如果服务器的负载较高或自动下载网速较慢，可以使用命令行更新：
 
-`cd /var/www/nextcloud
+```bash
+cd /var/www/nextcloud
 sudo -u www-data php ./updater/updater.phar --no-interaction
-`Copy
+```
 具体可以参考官网教程：[更新](https://docs.nextcloud.com/server/stable/admin_manual/maintenance/update.html)、[升级](https://docs.nextcloud.com/server/stable/admin_manual/maintenance/upgrade.html)和[手工升级](https://docs.nextcloud.com/server/stable/admin_manual/maintenance/manual_upgrade.html)。
 
 **切记更新之前先备份数据，避免丢失重要数据哦。**
 
-# Nextcloud 备份
+## Nextcloud 备份
 
 Nextcloud 目前还是个典型的 PHP + MySQL 程序，所以理论上只要备份 `/var/www/nextcloud` 目录，你的文件储存目录 (默认在 `/var/www/nextcloud/data`) 以及 MySQL 数据库即可，这里不再赘述。
