@@ -6,3 +6,6 @@ node_modules/
 public/
 .deploy*/
 _multiconfig.yml
+
+# Playwright MCP debug output (auto-generated, never commit)
+.playwright-mcp/
